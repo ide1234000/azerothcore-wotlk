@@ -86,13 +86,13 @@ enum VezaxEvents
     EVENT_RESTORE_TARGET                        = 11,
 };
 
-#define TEXT_VEZAX_AGGRO                            "Your destruction will herald a new age of suffering!"
-#define TEXT_VEZAX_SLAIN_1                          "You thought to stand before the legions of death... and survive?"
-#define TEXT_VEZAX_SLAIN_2                          "Defiance... a flaw of mortality."
-#define TEXT_VEZAX_SURGE                            "The black blood of Yogg-Saron courses through me! I. AM. UNSTOPPABLE!"
-#define TEXT_VEZAX_BERSERK                          "Your defeat was inevitable!"
-#define TEXT_VEZAX_DEATH                            "Oh, what horrors await...."
-#define TEXT_VEZAX_HARDMODE                         "Behold, now! Terror, absolute!"
+#define TEXT_VEZAX_AGGRO                            "你的毁灭将预示着一个痛苦的新时代！"
+#define TEXT_VEZAX_SLAIN_1                          "你以为站在死亡的军团面前，还活着吗？"
+#define TEXT_VEZAX_SLAIN_2                          "反抗，死亡的瑕疵。"
+#define TEXT_VEZAX_SURGE                            "尤格-萨隆的黑色血液！我不可阻挡！"
+#define TEXT_VEZAX_BERSERK                          "你的失败是不可避免的！"
+#define TEXT_VEZAX_DEATH                            "可怕的等待…"
+#define TEXT_VEZAX_HARDMODE                         "瞧，现在！绝对恐怖！"
 
 
 class boss_vezax : public CreatureScript
@@ -286,7 +286,7 @@ public:
                     {
                         vaporsCount++;
                         me->CastSpell(me, SPELL_SUMMON_SARONITE_VAPORS, false);
-                        me->MonsterTextEmote("A cloud of saronite vapors coalesces nearby!", 0, true);
+                        me->MonsterTextEmote("附近聚集了一团沙龙石蒸汽！", 0, true);
 
                         if( vaporsCount < 6 || !hardmodeAvailable )
                             events.RepeatEvent(30000);
@@ -310,7 +310,7 @@ public:
                 case EVENT_SARONITE_VAPORS_SWIRL:
                     if (summons.size())
                     {
-                        me->MonsterTextEmote("The saronite vapors mass and swirl violently, merging into a monstrous form!", 0, true);
+                        me->MonsterTextEmote("沙龙石蒸发了大量物质，剧烈地旋转，合并成一种可怕的形式！", 0, true);
                         if( Creature* sv = ObjectAccessor::GetCreature(*me, *(summons.begin())) )
                             sv->CastSpell(sv, SPELL_SARONITE_ANIMUS_FORMATION_VISUAL, true);
 
@@ -323,7 +323,7 @@ public:
                 case EVENT_SPELL_SUMMON_SARONITE_ANIMUS:
                     if (summons.size())
                     {
-                        me->MonsterTextEmote("A saronite barrier appears around General Vezax!", 0, true);
+                        me->MonsterTextEmote("韦扎克斯将军周围出现了一个屏障！", 0, true);
                         me->MonsterYell(TEXT_VEZAX_HARDMODE, LANG_UNIVERSAL, 0);
                         me->PlayDirectSound(SOUND_VEZAX_HARDMODE, 0);
 
