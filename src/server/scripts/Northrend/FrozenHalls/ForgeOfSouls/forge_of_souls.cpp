@@ -174,9 +174,9 @@ public:
         if (creature->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
         {
             if (creature->GetEntry() == NPC_JAINA_PART1)
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "What would you have of me, my lady?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "夫人，你要我做什么？", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
             else
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "What would you have of me, Banshee Queen?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "你想要我什么，女妖之王？", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
         }
 
         SendGossipMenuFor(player, 15207, creature->GetGUID());
