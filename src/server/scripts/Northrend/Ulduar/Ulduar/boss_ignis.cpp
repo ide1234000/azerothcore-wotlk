@@ -43,16 +43,16 @@
 #define NPC_SCORCHED_GROUND             33123
 #define NPC_WATER_TRIGGER               22515
 
-#define TEXT_AGGRO                      "Insolent whelps! Your blood will temper the weapons used to reclaim this world!"
-#define TEXT_ACTIVATE_CONSTRUCT         "Arise, soldiers of the Iron Crucible! The Makers' will be done!"
-#define TEXT_SCORCH_1                   "Let the inferno consume you!"
-#define TEXT_SCORCH_2                   "BURN! Burn in the makers fire!"
-#define TEXT_SLAG_POT                   "I will burn away your impurities!"
-#define TEXT_SLAY_1                     "More scraps for the scrapheap!"
-#define TEXT_SLAY_2                     "Your bones will serve as kindling!"
-#define TEXT_BERSERK                    "Let it be finished!"
-#define TEXT_DEATH                      "I. Have. Failed."
-#define TEXT_FLAME_JETS                 "Ignis The Furnace Master begins to cast Flame Jets!"
+#define TEXT_AGGRO                      "傲慢的小崽子！你的血液会冷却用来夺回这个世界的武器！"
+#define TEXT_ACTIVATE_CONSTRUCT         "起来吧，钢铁坩埚的战士们！制造者将被完成！"
+#define TEXT_SCORCH_1                   "让地狱吞噬你！"
+#define TEXT_SCORCH_2                   "燃烧！在造物者的火中燃烧！"
+#define TEXT_SLAG_POT                   "我会把你的杂质烧掉！"
+#define TEXT_SLAY_1                     "更多的标本！"
+#define TEXT_SLAY_2                     "你的骨头就像个笑话！"
+#define TEXT_BERSERK                    "结束吧"
+#define TEXT_DEATH                      "我...失败...了"
+#define TEXT_FLAME_JETS                 "开始释放火焰喷射器！"
 
 #define SOUND_AGGRO                     15564
 #define SOUND_ACTIVATE_CONSTRUCT        15565
