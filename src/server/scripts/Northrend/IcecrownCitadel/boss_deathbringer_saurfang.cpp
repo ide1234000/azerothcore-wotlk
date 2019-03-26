@@ -738,7 +738,7 @@ class npc_high_overlord_saurfang_icc : public CreatureScript
             InstanceScript* instance = creature->GetInstanceScript();
             if (instance && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != DONE && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != IN_PROGRESS)
             {
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "We are ready to go, High Overlord. The Lich King must fall!", 631, -ACTION_START_EVENT);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "我们准备好了，萨鲁法尔大王。 巫妖王必将失败！", 631, -ACTION_START_EVENT);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }
 
