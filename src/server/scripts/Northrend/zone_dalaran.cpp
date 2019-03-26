@@ -243,9 +243,9 @@ public:
             player->GetQuestStatus(QUEST_SUITABLE_DISGUISE_H) == QUEST_STATUS_INCOMPLETE)
         {
             if(player->GetTeamId() == TEAM_ALLIANCE)
-                AddGossipItemFor(player, 0, "Arcanist Tybalin said you might be able to lend me a certain tabard.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+                AddGossipItemFor(player, 0, "奥术师泰巴林说你可以借我一件战袍。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
             else
-                AddGossipItemFor(player, 0, "Magister Hathorel said you might be able to lend me a certain tabard.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+                AddGossipItemFor(player, 0, "魔导师哈索雷尔说你可以借给我一些战袍。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
         }
 
         SendGossipMenuFor(player, player->GetGossipTextId(creature), creature->GetGUID());
