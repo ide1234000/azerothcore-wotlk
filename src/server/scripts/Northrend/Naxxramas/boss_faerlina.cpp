@@ -149,7 +149,7 @@ public:
                     events.RepeatEvent(12000);
                     break;
                 case EVENT_SPELL_FRENZY:
-                    me->MonsterTextEmote("%s goes into a frenzy!", 0, true);
+                    me->MonsterTextEmote("%s 变得疯狂！", 0, true);
                     me->CastSpell(me, RAID_MODE(SPELL_FRENZY_10, SPELL_FRENZY_25), true);
                     events.RepeatEvent(70000);
                     break;
@@ -162,7 +162,7 @@ public:
         {
             if (spell->Id == SPELL_WIDOWS_EMBRACE)
             {
-                me->MonsterTextEmote("%s is affected by Widow's Embrace!", 0, true);
+                me->MonsterTextEmote("%s 受到寡妇的拥抱影响！", 0, true);
                 if (me->HasAura(RAID_MODE(SPELL_FRENZY_10, SPELL_FRENZY_25)))
                 {
                     me->RemoveAurasDueToSpell(RAID_MODE(SPELL_FRENZY_10, SPELL_FRENZY_25));
