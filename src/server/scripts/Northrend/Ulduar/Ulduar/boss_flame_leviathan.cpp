@@ -344,18 +344,18 @@ public:
                 _speakTimer += diff;
                 if (_speakTimer <= 10000)
                 {
-                    RadioSay("You've done it! You've broken the defenses of Ulduar. In a few moments, we will be dropping in to...", RSOUND_L1);
+                    RadioSay("你做到了！ 你已经攻破了奥杜尔的防御。 稍等片刻之后，我们将进入......", RSOUND_L1);
                     _speakTimer = 10000;
                 }
                 else if (_speakTimer > 16000 && _speakTimer < 20000)
                 {
                     _speakTimer = 20000;
-                    RadioSay("What is that? Be careful! Something's headed your way!", RSOUND_L2);
+                    RadioSay("那是什么？ 小心！ 有些东西在你那边！", RSOUND_L2);
                 }
                 else if (_speakTimer > 24000 && _speakTimer < 40000)
                 {
                     _speakTimer = 40000;
-                    RadioSay("Quicly! Evasive action! Evasive act--", RSOUND_L3);
+                    RadioSay("很好！闪避行动！闪避行动--", RSOUND_L3);
                 }
                 else if (_speakTimer > 41000 && _speakTimer < 60000)
                 {
@@ -431,30 +431,30 @@ public:
                         if (Unit* seat = vehicle->GetPassenger(i))
                             if (seat->GetTypeId() == TYPEID_UNIT)
                                 seat->ToCreature()->AI()->EnterEvadeMode();
-                    me->MonsterTextEmote("Flame Leviathan reactivated. Resumming combat functions.", 0, true);
+                    me->MonsterTextEmote("烈焰巨兽复活了。恢复作战功能。", 0, true);
                     return;
                 case EVENT_THORIMS_HAMMER:
                     SummonTowerHelpers(TOWER_OF_STORMS);
                     events.RepeatEvent(60000+rand()%60000);
-                    me->MonsterTextEmote("Flame Leviathan activates Thorim's Hammer.", 0, true);
+                    me->MonsterTextEmote("烈焰巨兽激活了索里姆的锤子。", 0, true);
                     Talk(FLAME_LEVIATHAN_SAY_TOWER_STORM);
                     return;
                 case EVENT_FREYA:
                     SummonTowerHelpers(TOWER_OF_LIFE);
                     events.PopEvent();
-                    me->MonsterTextEmote("Flame Leviathan activates Freya's Ward.", 0, true);
+                    me->MonsterTextEmote("烈焰巨兽激活了弗雷娅的防护。", 0, true);
                     Talk(FLAME_LEVIATHAN_SAY_TOWER_NATURE);
                     return;
                 case EVENT_MIMIRONS_INFERNO:
                     SummonTowerHelpers(TOWER_OF_FLAMES);
                     events.PopEvent();
-                    me->MonsterTextEmote("Flame Leviathan activates Mimiron's Inferno.", 0, true);
+                    me->MonsterTextEmote("烈焰巨兽激活了米米铁龙的地狱。", 0, true);
                     Talk(FLAME_LEVIATHAN_SAY_TOWER_FLAME);
                     return;
                 case EVENT_HODIRS_FURY:
                     SummonTowerHelpers(TOWER_OF_FROST);
                     events.PopEvent();
-                    me->MonsterTextEmote("Flame Leviathan activates Hodir's Fury.", 0, true);
+                    me->MonsterTextEmote("烈焰巨兽激活了霍迪尔的愤怒。", 0, true);
                     Talk(FLAME_LEVIATHAN_SAY_TOWER_FROST);
                     return;
             }
@@ -1216,7 +1216,7 @@ public:
     bool OnGossipHello(Player* player, Creature* creature) override
     {
         if (creature->GetInstanceScript() && creature->GetInstanceScript()->GetData(TYPE_LEVIATHAN) == NOT_STARTED && !creature->AI()->GetData(DATA_EVENT_STARTED))
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Activate secondary defensive systems.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "激活二级防御系统。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
@@ -1227,13 +1227,13 @@ public:
         switch (uiAction)
         {
             case GOSSIP_ACTION_INFO_DEF+1:
-                creature->MonsterSay("Activating secondary defensive systems will result in the extermination of unauthorized life forms via orbital emplacements. You are an unauthorized life form.", LANG_UNIVERSAL, 0);
+                creature->MonsterSay("激活二级防御系统将导致通过轨道定位消灭未经授权的生命形式。你是未经授权的生命形式。", LANG_UNIVERSAL, 0);
                 ClearGossipMenuFor(player);
                 AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Confirmed.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 break;
             case GOSSIP_ACTION_INFO_DEF+2:
-                creature->MonsterSay("Security override permitted. Secondary defensive systems activated. Backup deactivation for secondary systems can be accessed via individual generators located on the concourse. ", LANG_UNIVERSAL, 0);
+                creature->MonsterSay("允许安全覆盖。二级防御系统启动。二次系统的备用停用可通过位于大厅的单个发电机进行访问。 ", LANG_UNIVERSAL, 0);
                 creature->AI()->DoAction(ACTION_START_NORGANNON_EVENT);
 
                 CloseGossipMenuFor(player);
@@ -1450,18 +1450,18 @@ public:
                     switch (_step)
                     {
                         case 0:
-                            Say("Pentarus, you heard the man. Have your mages release the shield and let these brave souls through!", true);
+                            Say("彭塔罗斯，你听到那个人的话了。让你的法师释放盾牌，让这些勇敢的灵魂通过！", true);
                             NextStep(8000);
                             break;
                         case 1:
-                            Say("Of course, Brann: We will have the shield down momentarily.", false);
+                            Say("当然，布莱恩：我们马上就把盾牌放下。", false);
                             NextStep(7000);
                             break;
                         case 2:
                             if (Creature* cr = me->SummonCreature(NPC_BRANN_RADIO, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 5000))
                             {
                                 cr->PlayDirectSound(RSOUND_L0);
-                                cr->MonsterSay("Okay! Let's move out. Get into your machines; I'll speak to you from here via the radio.", LANG_UNIVERSAL, 0);
+                                cr->MonsterSay("可以！我们出去吧。到你的机器里去，我从这里通过无线电和你说话。", LANG_UNIVERSAL, 0);
                             }
                             NextStep(8000);
                             break;
@@ -1469,13 +1469,13 @@ public:
                             if (GameObject* go = me->FindNearestGameObject(GO_STARTING_BARRIER, 200.0f))
                                 go->Delete();
 
-                            Say("Mages of the Kirin Tor, on Brann's Command, release the shield! Defend this platform and our allies with your lives! For Dalaran!", false);
+                            Say("肯瑞托的法师，在布莱恩的指挥下，释放盾牌！用你的生命保卫这个平台和我们的盟友！为了达拉然！", false);
                             NextStep(9000);
                             break;
                         case 4:
-                            Say("Our allies are ready. Bring down the shield and make way!", true);
+                            Say("我们的盟友已经准备好了。把盾牌拿下来让路！", true);
                             _running = false;
-                            me->MonsterTextEmote("Go to your vehicles!", 0, true);
+                            me->MonsterTextEmote("快上你的载具。", 0, true);
                             if (me->GetInstanceScript())
                                 me->GetInstanceScript()->SetData(DATA_VEHICLE_SPAWN, VEHICLE_POS_START);
                             return;
@@ -1555,7 +1555,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 60.0f)
                     {
-                        Say("The iron dwarves have been seen emerging from the bunkers at the base of the pillars straight ahead of you. Destroy the bunkers and they will be forced to fall back.");
+                        Say("铁矮人已经被看到从掩体中冒出来，在底部的柱子直在你前面。摧毁掩体，他们将被迫撤退。");
                         me->PlayDirectSound(RSOUND_ENGAGE);
                         _helpLock = true;
                     }
@@ -1565,7 +1565,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 60.0f && who->GetPositionZ() > 430.0f)
                     {
-                        Say("This generator powers Mimiron's Gaze. In moments, it can turn earth to ash, stone to magma--we cannot let it reach full power!");
+                        Say("这个发电机为米米隆的注视提供动力。在瞬间，它可以把地球变成灰烬，把石头变成岩浆——我们不能让它达到最大的能量！");
                         me->PlayDirectSound(RSOUND_MIMIRON);
                         _lock = true;
                     }
@@ -1575,7 +1575,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 60.0f && who->GetPositionZ() < 380.0f)
                     {
-                        Say("You're approaching the tower of Freya. It contains the power to turn barren wastelands into jungles teeming with life overnight");
+                        Say("你正在接近弗雷娅塔。它拥有将贫瘠的荒地变成一夜之间充满生命的丛林的力量。");
                         me->PlayDirectSound(RSOUND_FREYA);
                         _lock = true;
                     }
@@ -1585,7 +1585,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 40.0f)
                     {
-                        Say("It appears you are near a repair station. Drive your vehicle on to the platform and it should be automatically repaired.");
+                        Say("看来你在修理站附近。把你的车开到站台上，它应该自动修理。");
                         me->PlayDirectSound(RSOUND_STATION);
                         _lock = true;
                     }
@@ -1595,7 +1595,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 40.0f)
                     {
-                        Say("This tower powers the hammer of Hodir. It is said to have the power to turn entire armies to ice!");
+                        Say("这座塔为霍迪尔之锤提供动力。据说它有能力把整个军队变成冰！");
                         me->PlayDirectSound(RSOUND_HODIR);
                         _lock = true;
                     }
@@ -1605,7 +1605,7 @@ public:
                 {
                     if (me->GetDistance2d(who) <= 60.0f)
                     {
-                        Say("Aaaah, the tower of Krolmir. It is said that the power of Thorim has been used only once. And that it turned an entire continent to dust...");
+                        Say("啊，克洛米尔之塔。据说索里姆的力量只使用过一次。它把整个大陆变成了尘土…");
                         me->PlayDirectSound(RSOUND_THORIM);
                         _lock = true;
                     }
@@ -1615,7 +1615,7 @@ public:
                 {
                     if (who->GetPositionX() >= -480.0f)
                     {
-                        Say("There are four generators powering the defense structures. If you sabotage the generators, the missile attacks will stop!");
+                        Say("有四台发电机为防御结构供电。如果你破坏发电机，导弹攻击就会停止！");
                         me->PlayDirectSound(RSOUND_GENERATORS);
                         _lock = true;
                     }
@@ -1856,7 +1856,7 @@ class spell_auto_repair : public SpellScriptLoader
                 if (!driver)
                     return;
 
-                driver->MonsterTextEmote("Automatic repair sequence initiated.", driver, true);
+                driver->MonsterTextEmote("自动维修顺序已启动。", driver, true);
 
                 // Actually should/could use basepoints (100) for this spell effect as percentage of health, but oh well.
                 vehicle->GetBase()->SetFullHealth();
