@@ -207,7 +207,7 @@ public:
                         if (pInstance)
                             if (Creature *brann = ObjectAccessor::GetCreature(*me, pInstance->GetData64(NPC_BRANN)))
                             {
-                                brann->MonsterYell("What in the name o' Madoran did THAT do? Oh! Wait: I just about got it...", LANG_UNIVERSAL, 0);
+                                brann->MonsterYell("以奥马多兰的名义做了什么？哦！等等：我刚拿到……", LANG_UNIVERSAL, 0);
                                 brann->PlayDirectSound(14276);
                             }
                     }
@@ -216,7 +216,7 @@ public:
                     {
                         if (Creature *brann = ObjectAccessor::GetCreature(*me, pInstance->GetData64(NPC_BRANN)))
                         {
-                            brann->MonsterYell("Ha, that did it! Help's a-comin'! Take this, ya glowin' iron brute!", LANG_UNIVERSAL, 0);
+                            brann->MonsterYell("哈，终于搞定了！援军来了！ 接招吧，你们这群白痴铁疙瘩！", LANG_UNIVERSAL, 0);
                             brann->PlayDirectSound(14277);
                         }
                         SummonPhase = PHASE_SUMMON_FRIENDLY_DWARFES;
@@ -264,7 +264,7 @@ public:
                 {
                     if (Creature *brann = ObjectAccessor::GetCreature(*me, pInstance->GetData64(NPC_BRANN)))
                     {
-                        brann->MonsterYell("This is a wee bit trickier that before... Oh, bloody--incomin'!", LANG_UNIVERSAL, 0);
+                        brann->MonsterYell("这之前有点麻烦...所有机器都无比复杂，噢，见鬼...敌人来了！", LANG_UNIVERSAL, 0);
                         brann->PlayDirectSound(14275);
                     }
 
