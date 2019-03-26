@@ -18724,7 +18724,7 @@ void Player::_LoadInventory(PreparedQueryResult result, uint32 timeDiff)
         {
             std::string subject = GetSession()->GetTrinityString(LANG_NOT_EQUIPPED_ITEM);
 
-            MailDraft draft(subject, "There were problems with equipping item(s).");
+            MailDraft draft(subject, "您有一部分战利品可能遗失在了虚空之中，我们现在将它们返还给您！");
             for (uint8 i = 0; !problematicItems.empty() && i < MAX_MAIL_ITEMS; ++i)
             {
                 draft.AddItem(problematicItems.front());
