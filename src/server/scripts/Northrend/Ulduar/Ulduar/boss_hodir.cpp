@@ -130,14 +130,14 @@ enum HodirEvents
 #define SPELL_FROZEN_BLOWS              RAID_MODE(SPELL_FROZEN_BLOWS_10, SPELL_FROZEN_BLOWS_25)
 #define SPELL_SHAMAN_STORM_CLOUD        RAID_MODE(SPELL_SHAMAN_STORM_CLOUD_10, SPELL_SHAMAN_STORM_CLOUD_25)
 
-#define TEXT_HODIR_AGGRO                "You will suffer for this trespass!"
-#define TEXTEMOTE_HODIR_FROZEN_BLOWS    "Hodir roars furious."
-#define TEXT_HODIR_FLASH_FREEZE         "Winds of the north consume you!"
-#define TEXTEMOTE_HODIR_HARD_MODE_MISSED "Hodir shatters the Rare Cache of Hodir!"
-#define TEXT_HODIR_SLAIN_1              "Tragic. To come so far, only to fail."
-#define TEXT_HODIR_SLAIN_2              "Welcome to the endless winter."
-#define TEXT_HODIR_BERSERK              "Enough! This ends now!"
-#define TEXT_HODIR_DEFEATED             "I... I am released from his grasp... at last."
+#define TEXT_HODIR_AGGRO                "你会因为这次入侵而受苦！"
+#define TEXTEMOTE_HODIR_FROZEN_BLOWS    "霍迪尔大发雷霆。"
+#define TEXT_HODIR_FLASH_FREEZE         "北方的风吞噬着你！"
+#define TEXTEMOTE_HODIR_HARD_MODE_MISSED "霍迪尔打破了霍迪尔的罕见高速缓存！"
+#define TEXT_HODIR_SLAIN_1              "悲剧。到目前为止，只是失败。"
+#define TEXT_HODIR_SLAIN_2              "欢迎来到无尽的冬天。"
+#define TEXT_HODIR_BERSERK              "够了！现在就结束了！"
+#define TEXT_HODIR_DEFEATED             "我…终于从他手中释放出来了。"
 
 enum HodirSounds
 {
