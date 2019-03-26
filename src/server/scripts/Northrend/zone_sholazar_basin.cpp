@@ -269,18 +269,18 @@ public:
 quest Still At It (12644)
 ******/
 
-#define MCM_TEXT_START "Beginning the distillation in 5 seconds."
-#define MCM_TEXT_PRESSURE "Pressure's too high! Open the pressure valve!"
-#define MCM_TEXT_HEAT "The still needs heat! Light the brazier!"
-#define MCM_TEXT_BANANA "Add bananas!"
-#define MCM_TEXT_ORANGE "Add another orange! Quickly!"
-#define MCM_TEXT_PAPAYA "Put a papaya in the still!"
-#define MCM_TEXT_CORRECT1 "Nicely handled! Stay on your toes!"
-#define MCM_TEXT_CORRECT2 "That'll do. Never know what it'll need next..."
-#define MCM_TEXT_CORRECT3 "Good job! Keep your eyes open, now."
-#define MCM_TEXT_SUCCESS1 "Well done! Be ready for anything!"
-#define MCM_TEXT_SUCCESS2 "We've done it! Come get the cask."
-#define MCM_TEXT_FAILED "You have FAILED!!!"
+#define MCM_TEXT_START "5秒钟后开始蒸馏。"
+#define MCM_TEXT_PRESSURE "压力太高了！打开压力阀！"
+#define MCM_TEXT_HEAT "还需要加热！点燃火盆！"
+#define MCM_TEXT_BANANA "加香蕉！"
+#define MCM_TEXT_ORANGE "再加一个橘子！赶快！"
+#define MCM_TEXT_PAPAYA "把木瓜放进蒸馏器！"
+#define MCM_TEXT_CORRECT1 "处理得很好！ 保持警惕！"
+#define MCM_TEXT_CORRECT2 "那就行了。不知道接下来需要什么…"
+#define MCM_TEXT_CORRECT3 "做得好！ 现在，睁大眼睛。"
+#define MCM_TEXT_SUCCESS1 "做得好！ 做好准备！"
+#define MCM_TEXT_SUCCESS2 "我们做到了！快去拿木桶。"
+#define MCM_TEXT_FAILED "你失败了！！！！"
 #define ACTION_PRESSURE 1
 #define ACTION_HEAT 2
 #define ACTION_BANANA 3
@@ -456,7 +456,7 @@ public:
             player->PrepareQuestMenu(creature->GetGUID());
 
         if (player->GetQuestStatus(12644) == QUEST_STATUS_INCOMPLETE)
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I'm ready to start the distillation, uh, Tipsy.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "我准备开始蒸馏了，嗯，喝多了。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
         SendGossipMenuFor(player, player->GetGossipTextId(creature), creature->GetGUID());
         return true;
