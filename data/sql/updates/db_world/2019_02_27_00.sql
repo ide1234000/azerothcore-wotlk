@@ -1074,7 +1074,7 @@ INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type
 (@ENTRY,0,2,0,1,0,100,0,2000,2000,40000,40000,1,0,30000,0,0,0,0,1,0,0,0,0,0,0,0,"Vol'jin - Out of Combat - Say Line 0");
 DELETE FROM `creature_text` WHERE `CreatureID`=31649;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES 
-(31649, 0, 0, 'Ello, mon! Da Battle for the Undercity is already going on. Thrall is fighting inside, you might be able to find him. You can also wait for him here, he will be back anytime now.', 14, 0, 100, 0, 0, 0, 0, 0, 'Vol''jin');
+(31649, 0, 0, '勇士们！ 幽暗城的战斗已经开始了。 萨尔正在城市内发起攻击，你或许可以去幽暗城找到他。你也可以在这里等他，他可以随时会回来。', 14, 0, 100, 0, 0, 0, 0, 0, 'Vol''jin');
 -- Conditions for Text Warning
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=22 AND `SourceGroup`=3 AND `SourceEntry`=31649;
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`NegativeCondition`,`ErrorType`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
