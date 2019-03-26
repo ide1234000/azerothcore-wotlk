@@ -118,7 +118,7 @@ class boss_archavon : public CreatureScript
                     case EVENT_STOMP:
                     {
                         char buffer[100];
-                        sprintf(buffer, "Archavon the Stone Watcher lunges for %s!", me->GetVictim()->GetName().c_str());
+                        sprintf(buffer, "岩石看守者向 %s 释放践踏！", me->GetVictim()->GetName().c_str());
                         me->MonsterTextEmote(buffer, 0);
                         me->CastSpell(me->GetVictim(), RAID_MODE(SPELL_STOMP_10, SPELL_STOMP_25), false);
                         me->GetVictim()->KnockbackFrom(me->GetPositionX(), me->GetPositionY(), 3.0f, 40.0f);
