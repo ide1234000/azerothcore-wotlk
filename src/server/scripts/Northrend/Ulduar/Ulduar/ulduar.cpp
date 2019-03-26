@@ -31,27 +31,27 @@ public:
         if (!pInstance)
             return true;
 
-        AddGossipItemFor(player, 0, "Teleport to the Expedition Base Camp.", GOSSIP_SENDER_MAIN, BASE_CAMP);
+        AddGossipItemFor(player, 0, "传送到登陆营地。", GOSSIP_SENDER_MAIN, BASE_CAMP);
         if (pInstance->GetData(TYPE_LEVIATHAN) >= DONE) // count special
         {
-            AddGossipItemFor(player, 0, "Teleport to the Formation Grounds.", GOSSIP_SENDER_MAIN, GROUNDS);
+            AddGossipItemFor(player, 0, "传送到构筑之地。", GOSSIP_SENDER_MAIN, GROUNDS);
             if (pInstance->GetData(TYPE_LEVIATHAN) == DONE)
             {
-                AddGossipItemFor(player, 0, "Teleport to the Colossal Forge.", GOSSIP_SENDER_MAIN, FORGE);
+                AddGossipItemFor(player, 0, "传送到大熔炉。", GOSSIP_SENDER_MAIN, FORGE);
                 if (pInstance->GetData(TYPE_XT002) == DONE)
                 {
-                    AddGossipItemFor(player, 0, "Teleport to the Scrapyard.", GOSSIP_SENDER_MAIN, SCRAPYARD);
-                    AddGossipItemFor(player, 0, "Teleport to the Antechamber of Ulduar.", GOSSIP_SENDER_MAIN, ANTECHAMBER);
+                    AddGossipItemFor(player, 0, "传送到垃圾场。", GOSSIP_SENDER_MAIN, SCRAPYARD);
+                    AddGossipItemFor(player, 0, "传送到奥杜尔的前厅。", GOSSIP_SENDER_MAIN, ANTECHAMBER);
                     if (pInstance->GetData(TYPE_KOLOGARN) == DONE)
                     {
-                        AddGossipItemFor(player, 0, "Teleport to the Shattered Walkway.", GOSSIP_SENDER_MAIN, WALKWAY);
+                        AddGossipItemFor(player, 0, "传送到破碎走廊。", GOSSIP_SENDER_MAIN, WALKWAY);
                         if (pInstance->GetData(TYPE_AURIAYA) == DONE)
                         {
-                            AddGossipItemFor(player, 0, "Teleport to the Conservatory of Life.", GOSSIP_SENDER_MAIN, CONSERVATORY);
+                            AddGossipItemFor(player, 0, "传送到生命学院。", GOSSIP_SENDER_MAIN, CONSERVATORY);
                             if (pInstance->GetData(DATA_CALL_TRAM))
-                                AddGossipItemFor(player, 0, "Teleport to the Spark of Imagination.", GOSSIP_SENDER_MAIN, SPARK);
+                                AddGossipItemFor(player, 0, "传送到思象火花。", GOSSIP_SENDER_MAIN, SPARK);
                             if (pInstance->GetData(TYPE_VEZAX) == DONE)
-                                AddGossipItemFor(player, 0, "Teleport to the Prison of Yogg-Saron.", GOSSIP_SENDER_MAIN, MADNESS);
+                                AddGossipItemFor(player, 0, "传送到尤格-萨隆监狱", GOSSIP_SENDER_MAIN, MADNESS);
                         }
                     }
                 }
@@ -109,7 +109,7 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Lend us your aid, keeper. Together we shall defeat Yogg-Saron.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "给我你的帮助，看守人。我们一起打败尤格-萨隆。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -121,22 +121,22 @@ public:
         switch (creature->GetEntry())
         {
             case NPC_FREYA_GOSSIP:
-                creature->MonsterYell("Eonar, your servant calls for your blessing!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("伊纳尔，你的仆人请求你的祝福！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15535);
                 _keeper = KEEPER_FREYA;
                 break;
             case NPC_HODIR_GOSSIP:
-                creature->MonsterYell("The veil of winter will protect you, champions!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("冬天的面纱会保护你，英雄们！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15559);
                 _keeper = KEEPER_HODIR;
                 break;
             case NPC_MIMIRON_GOSSIP:
-                creature->MonsterYell("Combat matrix enhanced. Behold wonderous rapidity!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("战斗矩阵增强。看这惊人的速度！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15630);
                 _keeper = KEEPER_MIMIRON;
                 break;
             case NPC_THORIM_GOSSIP:
-                creature->MonsterYell("Golganneth, lend me your strengh! Grant my mortal allies the power of thunder!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("戈尔甘尼特，把你的力量借给我！给我的凡人盟友雷霆之力！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15750);
                 _keeper = KEEPER_THORIM;
                 break;
