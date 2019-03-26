@@ -919,8 +919,8 @@ static Location ThrallSpawn[] =
     { 1270.474f, 350.982f, -65.027f, 0.034f       },
 };
 
-#define GOSSIP_WRYNN      "Reporting for duty, your majesty! Let the assault begin!"
-#define GOSSIP_THRALL     "I am ready, Warchief."
+#define GOSSIP_WRYNN      "报到！陛下，可以开始进攻了！"
+#define GOSSIP_THRALL     "我准备好了，大酋长。"
 
 /*######
 ## ALLIANCE
