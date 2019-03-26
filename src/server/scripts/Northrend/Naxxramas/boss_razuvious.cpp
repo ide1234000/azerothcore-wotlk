@@ -130,15 +130,15 @@ public:
             {
                 case 0:
                     DoPlaySoundToSet(me, SOUND_AGGRO_1);
-                    me->MonsterYell("Hah hah, I'm just getting warmed up!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("哈哈，我才刚刚热身！", LANG_UNIVERSAL, 0);
                     break;
                 case 1:
                     DoPlaySoundToSet(me, SOUND_AGGRO_2);
-                    me->MonsterYell("Stand and fight!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("站起来战斗！", LANG_UNIVERSAL, 0);
                     break;
                 case 2:
                     DoPlaySoundToSet(me, SOUND_AGGRO_3);
-                    me->MonsterYell("Show me what you've got!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("告诉我你有什么！", LANG_UNIVERSAL, 0);
                     break;
             }
 
@@ -180,15 +180,15 @@ public:
                     {
                         case 0:
                             DoPlaySoundToSet(me, SOUND_COMMAND_1);
-                            me->MonsterYell("Do as I taught you!", LANG_UNIVERSAL, 0);
+                            me->MonsterYell("像我教你的一样！", LANG_UNIVERSAL, 0);
                             break;
                         case 1:
                             DoPlaySoundToSet(me, SOUND_COMMAND_2);
-                            me->MonsterYell("Show them no mercy!", LANG_UNIVERSAL, 0);
+                            me->MonsterYell("告诉他们没有怜悯！", LANG_UNIVERSAL, 0);
                             break;
                         case 2:
                             DoPlaySoundToSet(me, SOUND_COMMAND_3);
-                            me->MonsterYell("You disappoint me, students!", LANG_UNIVERSAL, 0);
+                            me->MonsterYell("你们太令我失望了，学生们！", LANG_UNIVERSAL, 0);
                             break;
                     }
                     events.RepeatEvent(40000);
