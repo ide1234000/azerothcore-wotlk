@@ -629,7 +629,7 @@ class npc_hallows_end_soh : public CreatureScript
                 switch (events.GetEvent())
                 {
                     case 1:
-                        me->MonsterYell("Prepare yourselves, the bells have tolled! Shelter your weak, your young and your old! Each of you shall pay the final sum! Cry for mercy; the reckoning has come!", LANG_UNIVERSAL, 0);
+                        me->MonsterYell("战栗吧，丧钟已为你敲响！颤抖吧，挽歌已为你宣唱！末日的审判以潸然降临，所有生者都将付出代价……哈哈哈哈哈哈哈哈哈", LANG_UNIVERSAL, 0);
                         me->PlayDirectSound(11966);
                         events.PopEvent();
                         break;
@@ -663,12 +663,12 @@ class npc_hallows_end_soh : public CreatureScript
                         }
                         if (counter == 5)
                         {
-                            me->MonsterYell("The sky is dark. The fire burns. You strive in vain as Fate's wheel turns.", LANG_UNIVERSAL, 0);
+                            me->MonsterYell("天空一片黑暗,火焰仍在肆虐,你的攻击豪无意义,命运之轮已经开始旋转。", LANG_UNIVERSAL, 0);
                             me->PlayDirectSound(12570);
                         }
                         else if (counter == 10)
                         {
-                            me->MonsterYell("The town still burns. A cleansing fire! Time is short, I'll soon retire!", LANG_UNIVERSAL, 0);
+                            me->MonsterYell("小镇还在燃烧，我是时候撤退了。", LANG_UNIVERSAL, 0);
                             me->PlayDirectSound(12571);
                         }
 
@@ -720,7 +720,7 @@ class npc_hallows_end_soh : public CreatureScript
             {
                 if (failed)
                 {
-                    me->MonsterYell("Fire consumes! You've tried and failed. Let there be no doubt, justice prevailed!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("你的努力，已被烈焰吞入了虚无的深渊，我的正义，却让命运捧上了胜利的王座。", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(11967);
                     for (std::list<uint64>::const_iterator itr = unitList.begin(); itr != unitList.end(); ++itr)
                         if (Unit* c = ObjectAccessor::GetUnit(*me, *itr))
@@ -730,7 +730,7 @@ class npc_hallows_end_soh : public CreatureScript
                 }
                 else
                 {
-                    me->MonsterYell("My flames have died, left not a spark! I shall send you now to the lifeless dark!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("你们的身躯将支离破碎，你们的灵魂将得到诅咒。", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(11968);
                     float x, y, z;
                     GetPosToLand(x, y, z);
@@ -748,7 +748,7 @@ class npc_hallows_end_soh : public CreatureScript
 
             void JustDied(Unit*  /*killer*/)
             {
-                me->MonsterYell("So eager you are, for my blood to spill. Yet to vanquish me, 'tis my head you must kill!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("我的躯体健壮而纯洁！现在，让我来治愈你们这帮阴暗的灵魂吧。", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(11969);
                 float x, y, z;
                 GetPosToLand(x, y, z);
@@ -914,7 +914,7 @@ class boss_headless_horseman : public CreatureScript
             void JustDied(Unit*  /*killer*/)
             {
                 summons.DespawnAll();
-                me->MonsterSay("This end have I reached before. What new adventure lies in store?", LANG_UNIVERSAL, 0);
+                me->MonsterSay("我以前达到过这个目的。有什么新的冒险吗？", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_DEATH);
                 std::list<Creature*> unitList;
                 me->GetCreaturesWithEntryInRange(unitList, 100.0f, NPC_PUMPKIN_FIEND);
@@ -929,7 +929,7 @@ class boss_headless_horseman : public CreatureScript
 
             void KilledUnit(Unit*  /*who*/)
             {
-                me->MonsterYell("Your body lies beaten, battered and broken. Let my curse be your own, fate has spoken.", LANG_UNIVERSAL, 0);
+                me->MonsterYell("你们的身躯将支离破碎，你们的灵魂将得到诅咒。", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_SLAY);
             }
 
@@ -961,7 +961,7 @@ class boss_headless_horseman : public CreatureScript
                     events.CancelEvent(EVENT_HORSEMAN_WHIRLWIND);
                     events.CancelEvent(EVENT_HORSEMAN_CONFLAGRATION);
                     events.CancelEvent(EVENT_SUMMON_PUMPKIN);
-                    me->MonsterYell("Here's my body, fit and pure! Now, your blackened souls I'll cure!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我的躯体健壮而纯洁！现在，让我来治愈你们这帮阴暗的灵魂吧。", LANG_UNIVERSAL, 0);
 
                     if (phase == 1)
                         events.ScheduleEvent(EVENT_HORSEMAN_CONFLAGRATION, 6000);
@@ -1062,23 +1062,23 @@ class boss_headless_horseman : public CreatureScript
                         switch (talkCount)
                         {
                         case 1:
-                            player->MonsterSay("Horseman rise...", LANG_UNIVERSAL, 0);
+                            player->MonsterSay("骑士崛起......", LANG_UNIVERSAL, 0);
                             break;
                         case 2:
-                            player->MonsterSay("Your time is nigh...", LANG_UNIVERSAL, 0);
+                            player->MonsterSay("你的时间快到了......", LANG_UNIVERSAL, 0);
                             if (Creature* trigger = me->SummonTrigger(1765.28f, 1347.46f, 17.5514f, 0.0f, 15*IN_MILLISECONDS))
                                 trigger->CastSpell(trigger, SPELL_EARTH_EXPLOSION, true);
                             break;
                         case 3:
                             me->GetMotionMaster()->MovePath(236820, false);
                             me->CastSpell(me, SPELL_SHAKE_CAMERA_SMALL, true);
-                            player->MonsterSay("You felt death once...", LANG_UNIVERSAL, 0);
-                            me->MonsterSay("It is over, your search is done. Let fate choose now, the righteous one.", LANG_UNIVERSAL, 0);
+                            player->MonsterSay("你曾经感受到死亡…", LANG_UNIVERSAL, 0);
+                            me->MonsterSay("结束了，你的探索完成了。现在就让命运选择吧，勇士。", LANG_UNIVERSAL, 0);
                             me->PlayDirectSound(SOUND_AGGRO);
                             break;
                         case 4:
                             me->CastSpell(me, SPELL_SHAKE_CAMERA_MEDIUM, true);
-                            player->MonsterSay("Now, know demise!", LANG_UNIVERSAL, 0);
+                            player->MonsterSay("现在，认识死亡！", LANG_UNIVERSAL, 0);
                             events.PopEvent();
                             talkCount = 0;
                             return; // pop and return, skip repeat
@@ -1145,7 +1145,7 @@ class boss_headless_horseman : public CreatureScript
                         }
                         else
                         {
-                            me->MonsterSay("Soldiers arise, stand and fight! Bring victory at last to this fallen knight!", LANG_UNIVERSAL, 0);
+                            me->MonsterSay("士兵们起来，站起来战斗！给这个倒下的骑士带来胜利！", LANG_UNIVERSAL, 0);
                             me->PlayDirectSound(SOUND_SPROUT);
                             events.RepeatEvent(15000);
                             talkCount = 0;
