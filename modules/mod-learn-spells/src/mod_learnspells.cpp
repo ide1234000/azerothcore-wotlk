@@ -1,3 +1,4 @@
+#include "ScriptMgr.h"
 #include "DisableMgr.h"
 #include "Config.h"
 #include "Player.h"
