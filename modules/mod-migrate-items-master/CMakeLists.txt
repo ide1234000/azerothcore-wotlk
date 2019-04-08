@@ -1,0 +1,3 @@
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/Migrate_SC.cpp")
+AC_ADD_SCRIPT_LOADER("Migrate" "${CMAKE_CURRENT_LIST_DIR}/src/loader.h")
+AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/Migrate.conf.dist")

@@ -1,0 +1,13 @@
+[worldserver]
+
+#########################################################
+#
+#	Migrate.Enable
+#     	Description: Enable or disable this system.
+#     	Default: 1 - Enable
+#
+
+Migrate.Enable = 1
+
+#
+###################################################################################################
