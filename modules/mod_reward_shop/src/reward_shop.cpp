@@ -38,7 +38,7 @@ public:
 
         std::string text = "输入代码并按下【接受】";
         player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "我想兑换我的代码。", GOSSIP_SENDER_MAIN, 1, text, 0, true);
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "我如何获得代码？", GOSSIP_SENDER_MAIN, 2);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "我该如何获得代码？", GOSSIP_SENDER_MAIN, 2);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "我没有代码，打扰了！", GOSSIP_SENDER_MAIN, 3);
         if (sConfigMgr->GetBoolDefault("AllowGM", 1))
             if (player->IsGameMaster())
