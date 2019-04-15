@@ -23,15 +23,15 @@ EndContentData */
 #include "hyjalAI.h"
 #include "Player.h"
 
-#define GOSSIP_ITEM_BEGIN_ALLY      "My companions and I are with you, Lady Proudmoore."
-#define GOSSIP_ITEM_ANETHERON       "We are ready for whatever Archimonde might send our way, Lady Proudmoore."
+#define GOSSIP_ITEM_BEGIN_ALLY      "我的同伴和我在一起，普罗德摩尔夫人。"
+#define GOSSIP_ITEM_ANETHERON       "我们已准备好迎接阿克蒙德可能派我们前往的方式，普罗德摩尔夫人。"
 
-#define GOSSIP_ITEM_BEGIN_HORDE     "I am with you, Thrall."
-#define GOSSIP_ITEM_AZGALOR         "We have nothing to fear."
+#define GOSSIP_ITEM_BEGIN_HORDE     "萨尔，我和你在一起。"
+#define GOSSIP_ITEM_AZGALOR         "我们没有什么可担心的。"
 
-#define GOSSIP_ITEM_RETREAT         "We can't keep this up. Let's retreat!"
+#define GOSSIP_ITEM_RETREAT         "我们无法保持这种状态。让我们撤退！"
 
-#define GOSSIP_ITEM_TYRANDE         "Aid us in defending Nordrassil"
+#define GOSSIP_ITEM_TYRANDE         "帮助我们保卫诺达希尔"
 #define ITEM_TEAR_OF_GODDESS        24494
 
 #define GOSSIP_ITEM_GM1             "[GM] Toggle Debug Timers"
