@@ -1890,15 +1890,15 @@ enum LockSmith
     SPELL_ESSENCE_INFUSED_MOONSTONE       = 40173,
 };
 
-#define GOSSIP_LOST_ARCATRAZ_KEY                "I've lost my key to the Arcatraz."
-#define GOSSIP_LOST_SHADOWFORGE_KEY             "I've lost my key to the Blackrock Depths."
-#define GOSSIP_LOST_SKELETON_KEY                "I've lost my key to the Scholomance."
-#define GOSSIP_LOST_SHATTERED_HALLS_KEY         "I've lost my key to the Shattered Halls."
-#define GOSSIP_LOST_THE_MASTERS_KEY             "I've lost my key to the Karazhan."
-#define GOSSIP_LOST_VIOLET_HOLD_KEY             "I've lost my key to the Violet Hold."
-#define GOSSIP_LOST_ESSENCE_INFUSED_MOONSTONE   "I've lost my Essence-Infused Moonstone."
-#define GOSSIP_LOST_KEY_TO_THE_FOCUSING_IRIS    "I've lost my Key to the Focusing Iris."
-#define GOSSIP_LOST_HC_KEY_TO_THE_FOCUSING_IRIS "I've lost my Heroic Key to the Focusing Iris."
+#define GOSSIP_LOST_ARCATRAZ_KEY                "我把我的钥匙丢了。"
+#define GOSSIP_LOST_SHADOWFORGE_KEY             "我把我的钥匙弄丢了。"
+#define GOSSIP_LOST_SKELETON_KEY                "我把学校的钥匙丢了。"
+#define GOSSIP_LOST_SHATTERED_HALLS_KEY         "我丢失了通往破碎大厅的钥匙。"
+#define GOSSIP_LOST_THE_MASTERS_KEY             "我把卡拉赞的钥匙丢了。"
+#define GOSSIP_LOST_VIOLET_HOLD_KEY             "我把紫罗兰的钥匙丢了。"
+#define GOSSIP_LOST_ESSENCE_INFUSED_MOONSTONE   "我已经失去了注入月光石的精华。"
+#define GOSSIP_LOST_KEY_TO_THE_FOCUSING_IRIS    "我失去了聚焦之虹的钥匙。"
+#define GOSSIP_LOST_HC_KEY_TO_THE_FOCUSING_IRIS "我失去了聚焦之虹的英雄钥匙。"
 
 class npc_locksmith : public CreatureScript
 {
@@ -2002,8 +2002,8 @@ public:
 
 #define EXP_COST                100000 //10 00 00 copper (10golds)
 #define GOSSIP_TEXT_EXP         14736
-#define GOSSIP_XP_OFF           "I no longer wish to gain experience."
-#define GOSSIP_XP_ON            "I wish to start gaining experience again."
+#define GOSSIP_XP_OFF           "我不想再获得经验了。"
+#define GOSSIP_XP_ON            "我希望再次获得经验。"
 
 class npc_experience : public CreatureScript
 {
