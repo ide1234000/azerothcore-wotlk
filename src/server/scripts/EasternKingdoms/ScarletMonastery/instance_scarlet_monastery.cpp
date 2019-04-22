@@ -648,7 +648,7 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        AddGossipItemFor(player, 0, "Curse? What's going on here, Fairbanks?", GOSSIP_SENDER_MAIN, 1);
+        AddGossipItemFor(player, 0, "诅咒？ 法尔班克斯，这里发生了什么？", GOSSIP_SENDER_MAIN, 1);
         SendGossipMenuFor(player, 100100, creature->GetGUID());
         return true;
     }
@@ -661,77 +661,77 @@ public:
         {
         case 1:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "Mograine?", GOSSIP_SENDER_MAIN, 2);
+            AddGossipItemFor(player, 0, "莫格莱尼？", GOSSIP_SENDER_MAIN, 2);
             SendGossipMenuFor(player, 100101, creature->GetGUID());
             return true;
         case 2:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "What do you mean?", GOSSIP_SENDER_MAIN, 3);
+            AddGossipItemFor(player, 0, "你什么意思？", GOSSIP_SENDER_MAIN, 3);
             SendGossipMenuFor(player, 100102, creature->GetGUID());
             return true;
         case 3:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "I still do not fully understand.", GOSSIP_SENDER_MAIN, 4);
+            AddGossipItemFor(player, 0, "我还是不能完全明白。", GOSSIP_SENDER_MAIN, 4);
             SendGossipMenuFor(player, 100103, creature->GetGUID());
             return true;
         case 4:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "Incredible story. So how did he die?", GOSSIP_SENDER_MAIN, 5);
+            AddGossipItemFor(player, 0, "难以置信的故事。他是怎么死的？", GOSSIP_SENDER_MAIN, 5);
             SendGossipMenuFor(player, 100104, creature->GetGUID());
             return true;
         case 5:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "You mean...", GOSSIP_SENDER_MAIN, 6);
+            AddGossipItemFor(player, 0, "你的意思是…", GOSSIP_SENDER_MAIN, 6);
             SendGossipMenuFor(player, 100105, creature->GetGUID());
             return true;
         case 6:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "How do you know all of this?", GOSSIP_SENDER_MAIN, 7);
+            AddGossipItemFor(player, 0, "你怎么知道这些的？", GOSSIP_SENDER_MAIN, 7);
             SendGossipMenuFor(player, 100106, creature->GetGUID());
             return true;
         case 7:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "A thousand? For one man?", GOSSIP_SENDER_MAIN, 8);
+            AddGossipItemFor(player, 0, "一千？一个人？", GOSSIP_SENDER_MAIN, 8);
             SendGossipMenuFor(player, 100107, creature->GetGUID());
             return true;
         case 8:
             creature->HandleEmoteCommand(5);
-            AddGossipItemFor(player, 0, "Yet? Yet what?", GOSSIP_SENDER_MAIN, 9);
+            AddGossipItemFor(player, 0, "然而？ 然后呢？", GOSSIP_SENDER_MAIN, 9);
             SendGossipMenuFor(player, 100108, creature->GetGUID());
             return true;
         case 9:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "And did he?", GOSSIP_SENDER_MAIN, 10);
+            AddGossipItemFor(player, 0, "他做到了吗？", GOSSIP_SENDER_MAIN, 10);
             SendGossipMenuFor(player, 100109, creature->GetGUID());
             return true;
         case 10:
             creature->HandleEmoteCommand(274);
-            AddGossipItemFor(player, 0, "Continue please, Fairbanks.", GOSSIP_SENDER_MAIN, 11);
+            AddGossipItemFor(player, 0, "请继续，法尔班克斯。", GOSSIP_SENDER_MAIN, 11);
             SendGossipMenuFor(player, 100110, creature->GetGUID());
             return true;
         case 11:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "You mean...", GOSSIP_SENDER_MAIN, 12);
+            AddGossipItemFor(player, 0, "你的意思是…", GOSSIP_SENDER_MAIN, 12);
             SendGossipMenuFor(player, 100111, creature->GetGUID());
             return true;
         case 12:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "You were right, Fairbanks. That is tragic.", GOSSIP_SENDER_MAIN, 13);
+            AddGossipItemFor(player, 0, "你说得对，法尔班克斯。那太悲惨了。", GOSSIP_SENDER_MAIN, 13);
             SendGossipMenuFor(player, 100112, creature->GetGUID());
             return true;
         case 13:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "And you did...", GOSSIP_SENDER_MAIN, 14);
+            AddGossipItemFor(player, 0, "你做到了…", GOSSIP_SENDER_MAIN, 14);
             SendGossipMenuFor(player, 100113, creature->GetGUID());
             return true;
         case 14:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "You tell an incredible tale, Fairbanks. What of the blade? Is it beyond redemption?", GOSSIP_SENDER_MAIN, 15);
+            AddGossipItemFor(player, 0, "你讲述了一个难以置信的故事，法尔班克斯。剑锋是什么？这无法挽回吗？", GOSSIP_SENDER_MAIN, 15);
             SendGossipMenuFor(player, 100114, creature->GetGUID());
             return true;
         case 15:
             creature->HandleEmoteCommand(1);
-            AddGossipItemFor(player, 0, "But his son is dead.", GOSSIP_SENDER_MAIN, 16);
+            AddGossipItemFor(player, 0, "但他的儿子已经死了。", GOSSIP_SENDER_MAIN, 16);
             SendGossipMenuFor(player, 100115, creature->GetGUID());
             return true;
         case 16:
