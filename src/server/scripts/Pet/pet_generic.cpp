@@ -194,17 +194,17 @@ struct argentPonyBanner
 static argentPonyBanner argentBanners[MAX_RACES] =
 {
     {0, 0, ""},
-    {2781, 62594, "Stormwind Champion's Pennant"},
-    {2783, 63433, "Orgrimmar Champion's Pennant"},
-    {2780, 63427, "Ironforge Champion's Pennant"},
-    {2777, 63406, "Darnassus Champion's Pennant"},
-    {2787, 63430, "Forsaken Champion's Pennant"},
-    {2786, 63436, "Thunder Bluff Champion's Pennant"},
-    {2779, 63396, "Gnomeregan Champion's Pennant"},
-    {2784, 63399, "Darkspear Champion's Pennant"},
+    {2781, 62594, "暴风城冠军的旗帜"},
+    {2783, 63433, "奥格瑞玛冠军的旗帜"},
+    {2780, 63427, "铁炉堡冠军的旗帜"},
+    {2777, 63406, "达纳苏斯冠军的旗帜"},
+    {2787, 63430, "幽暗城冠军的旗帜"},
+    {2786, 63436, "雷霆崖冠军的旗帜"},
+    {2779, 63396, "诺莫瑞根冠军的旗帜"},
+    {2784, 63399, "暗矛冠军的旗帜"},
     {0, 0, ""},
-    {2785, 63403, "Silvermoon Champion's Pennant"},
-    {2778, 63423, "Exodar Champion's Pennant"}
+    {2785, 63403, "银月城冠军的旗帜"},
+    {2778, 63423, "埃索达冠军的旗帜"}
 };
 
 class npc_pet_gen_argent_pony_bridle : public CreatureScript
@@ -348,11 +348,11 @@ public:
         {
             uint8 _state = creature->AI()->GetData(0 /*GET_DATA_STATE*/);
             if (_state == ARGENT_PONY_STATE_ENCH || _state == ARGENT_PONY_STATE_VENDOR)
-                AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Visit a trader.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_TRADE);
+                AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "查看交易。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_TRADE);
             if (_state == ARGENT_PONY_STATE_ENCH || _state == ARGENT_PONY_STATE_BANK)
-                AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Visit a bank.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_BANK);
+                AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "查看看银行。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_BANK);
             if (_state == ARGENT_PONY_STATE_ENCH || _state == ARGENT_PONY_STATE_MAILBOX)
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Visit a mailbox.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_MAILBOX);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "查看邮箱。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_MAILBOX);
         }
 
         for (uint8 i = RACE_HUMAN; i < MAX_RACES; ++i)
