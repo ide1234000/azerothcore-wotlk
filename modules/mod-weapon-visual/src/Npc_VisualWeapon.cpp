@@ -226,7 +226,8 @@ public:
             Field* fields = result->Fetch();
             uint32 iguid = fields[0].GetUInt32();
             uint32 visual = fields[1].GetUInt32();
-
+        if (!pItem)
+        return;
             // Lets make sure our item guid matches the guid in the DB
             if (pItem->GetGUIDLow() == iguid)
             {
