@@ -24,14 +24,14 @@ EndContentData */
 ## npc_mountaineer_pebblebitty
 ######*/
 
-#define GOSSIP_MP "Open the gate please, i need to get to Searing Gorge"
+#define GOSSIP_MP "请打开大门，我要去灼热的峡谷。"
 
-#define GOSSIP_MP1 "But i need to get there, now open the gate!"
-#define GOSSIP_MP2 "Ok, so what is this other way?"
-#define GOSSIP_MP3 "Doesn't matter, i'm invulnerable."
-#define GOSSIP_MP4 "Yes..."
-#define GOSSIP_MP5 "Ok, i'll try to remember that."
-#define GOSSIP_MP6 "A key? Ok!"
+#define GOSSIP_MP1 "但我要去那里，现在开门！"
+#define GOSSIP_MP2 "好吧，有什么其他办法吗？"
+#define GOSSIP_MP3 "没关系，我是无懈可击的。"
+#define GOSSIP_MP4 "是的..."
+#define GOSSIP_MP5 "好的，我会记住的。"
+#define GOSSIP_MP6 "钥匙？好吧!"
 
 class npc_mountaineer_pebblebitty : public CreatureScript
 {
