@@ -24,7 +24,7 @@ EndContentData */
 ## npc_mountaineer_pebblebitty
 ######*/
 
-#define GOSSIP_MP "请打开大门，我要去灼热的峡谷。"
+#define GOSSIP_MP "请打开大门，我要去灼热峡谷。"
 
 #define GOSSIP_MP1 "但我要去那里，现在开门！"
 #define GOSSIP_MP2 "好吧，有什么其他办法吗？"
