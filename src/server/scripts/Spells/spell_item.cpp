@@ -751,7 +751,7 @@ class spell_item_fish_feast : public SpellScriptLoader
             void HandleScriptEffect(SpellEffIndex effIndex)
             {
                 PreventHitDefaultEffect(effIndex);
-                GetCaster()->ToPlayer()->TextEmote("prepares a Fish Feast!");
+                GetCaster()->ToPlayer()->TextEmote("准备了一顿鱼宴！");
             }
 
             void Register()
@@ -1059,11 +1059,11 @@ class spell_item_oracle_ablutions : public SpellScriptLoader
                 if (Player* player = caster->ToPlayer())
                 {
                     std::string name = player->GetName();
-                    player->TextEmote("casually flips his Titanium Seal of Dalaran");
+                    player->TextEmote("随意地翻动着他的钛制达拉兰印章");
                     if (urand(0,1))
-                        player->TextEmote("finds the coin face down for tails!");
+                        player->TextEmote("找到了硬币正面朝下的尾巴！");
                     else
-                        player->TextEmote("catches the coin heads up!");
+                        player->TextEmote("把硬币正面朝上！");
                 }
             }
 
