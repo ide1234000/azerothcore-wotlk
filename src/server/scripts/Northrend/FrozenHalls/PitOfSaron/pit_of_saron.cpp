@@ -1355,29 +1355,29 @@ public:
 };
 
 const char* slaveTexts[23] = {
-"I owe you a long night of drinking, my friend.",
-"Don't let a single one of them live.",
-"I can barely feel my arms, but I'll stand with you once I find some weapons.",
-"I can hardly believe my eyes. Thank you. Really, thank you.",
-"I owe you my life.",
-"I thought I might die in this pit. Thank you!",
-"I will find a way to repay you someday, hero.",
-"I'd almost given up hope.",
-"I'd lost all track of time in this forsaken place. You're a sight for sore eyes, friend.",
-"I'll fight by your side. Offer them no mercy.",
-"I'll join you as soon as I catch my breath, heroes. Thank you.",
-"I'm going to return to help free the rest of the slaves. Thank you again, hero.",
-"I'm going to return to the front of the quarry. Kill a few extra for me.",
-"I'm so glad you're here. I wouldn't have made it much longer.",
-"I'm with you, hero.",
-"If by life or death I can repay you, I will.",
-"Now is the time for revenge.",
-"Please, carry out our vengeance on the Scourgelord.",
-"Too many of us died in this pit. Far too many.",
-"When you kill the Pit Master, spit on his corpse for me, will you?",
-"You're a beautiful sight... you have no idea.",
-"Have my babies.",
-"I could just kiss you!"
+"我欠你一晚上的酒钱，朋友。",
+"不要让他们中的任何一个活着。",
+"我几乎感觉不到我的手臂,但一旦找到武器,我就站在你的身旁。"
+"我简直不敢相信自己的眼睛。谢谢您。真的，谢谢。",
+"我欠你我的命。",
+"我以为我会死在这个坑里。谢谢！",
+"总有一天我会想办法报答你的，英雄",
+"我几乎放弃了希望。",
+"我在这个被遗弃的地方失去了所有的时间。你的眼睛真痛，朋友。",
+"我会和你并肩作战。不要怜悯他们。",
+"英雄们，我一喘口气就加入你们的行列。谢谢。"
+"我要回去帮助解放其余的奴隶。再次感谢你,英雄。",
+"我要回采石场前面去。为我多杀点。",
+"很高兴你能来。我不会再多活了。",
+"我和你在一起，英雄。",
+"如果我活着或死亡，我会报答你，我会的。",
+"现在是报仇的时候了。",
+"求你了，我们要向灾祸之主报仇。",
+"我们太多人死在这个坑里了。太多了。",
+"你杀坑主的时候，替我吐他的尸体，好吗？",
+"你真是一道美丽的风景……你不知道。",
+"我要给你生猴子！",
+"吻你！"
 };
 
 const Position slaveFreePos[4] = {
