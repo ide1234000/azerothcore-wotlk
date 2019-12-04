@@ -5,8 +5,8 @@ INSERT INTO `npc_text` (`ID`, `text0_0`) VALUES
 (@TEXT_ID+1, '你可以保存自己设置的多个幻化。\r\n\r\n如果需要保存，首先你必须装备幻化后的物品。\r\n然后当你进入设置管理菜单并进入保存方案设置菜单时，将显示你已身穿幻化后的物品，以便你看到你正在保存的东西。\r\n如果你认为该幻化是正确的，你可以点击保存该配置为方案并按照你的意愿命名。\r\n\r\n要使用某个方案设定，你可以在设置管理菜单中单击保存的设置方案，然后选择使用它们。\r\n如果这套装备已经幻化了，那么旧的幻化就失效了。\r\n\r\n若要删除一个方案，可以转到菜单并选择“删除方案”。');
 
 SET @STRING_ENTRY := 11100;
-DELETE FROM `trinity_string` WHERE `entry` IN  (@STRING_ENTRY+0,@STRING_ENTRY+1,@STRING_ENTRY+2,@STRING_ENTRY+3,@STRING_ENTRY+4,@STRING_ENTRY+5,@STRING_ENTRY+6,@STRING_ENTRY+7,@STRING_ENTRY+8,@STRING_ENTRY+9,@STRING_ENTRY+10);
-INSERT INTO `trinity_string` (`entry`, `content_default`) VALUES
+DELETE FROM `acore_string` WHERE `entry` IN  (@STRING_ENTRY+0,@STRING_ENTRY+1,@STRING_ENTRY+2,@STRING_ENTRY+3,@STRING_ENTRY+4,@STRING_ENTRY+5,@STRING_ENTRY+6,@STRING_ENTRY+7,@STRING_ENTRY+8,@STRING_ENTRY+9,@STRING_ENTRY+10);
+INSERT INTO `acore_string` (`entry`, `content_default`) VALUES
 (@STRING_ENTRY+0, '幻化成功！'),
 (@STRING_ENTRY+1, '设备槽空'),
 (@STRING_ENTRY+2, '选定的源项目无效'),
