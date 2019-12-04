@@ -114,20 +114,20 @@ const char* Transmogrification::GetSlotName(uint8 slot, WorldSession* /*session*
 
     switch (slot)
     {
-        case EQUIPMENT_SLOT_HEAD: return  "头部";// session->GetTrinityString(LANG_SLOT_NAME_HEAD);
-        case EQUIPMENT_SLOT_SHOULDERS: return  "肩膀";// session->GetTrinityString(LANG_SLOT_NAME_SHOULDERS);
-        case EQUIPMENT_SLOT_BODY: return  "衬衫";// session->GetTrinityString(LANG_SLOT_NAME_BODY);
-        case EQUIPMENT_SLOT_CHEST: return  "胸部";// session->GetTrinityString(LANG_SLOT_NAME_CHEST);
-        case EQUIPMENT_SLOT_WAIST: return  "腰带";// session->GetTrinityString(LANG_SLOT_NAME_WAIST);
-        case EQUIPMENT_SLOT_LEGS: return  "腿部";// session->GetTrinityString(LANG_SLOT_NAME_LEGS);
-        case EQUIPMENT_SLOT_FEET: return  "脚部";// session->GetTrinityString(LANG_SLOT_NAME_FEET);
-        case EQUIPMENT_SLOT_WRISTS: return  "手腕";// session->GetTrinityString(LANG_SLOT_NAME_WRISTS);
-        case EQUIPMENT_SLOT_HANDS: return  "手部";// session->GetTrinityString(LANG_SLOT_NAME_HANDS);
-        case EQUIPMENT_SLOT_BACK: return  "背部";// session->GetTrinityString(LANG_SLOT_NAME_BACK);
-        case EQUIPMENT_SLOT_MAINHAND: return  "主手";// session->GetTrinityString(LANG_SLOT_NAME_MAINHAND);
-        case EQUIPMENT_SLOT_OFFHAND: return  "副手";// session->GetTrinityString(LANG_SLOT_NAME_OFFHAND);
-        case EQUIPMENT_SLOT_RANGED: return  "远程";// session->GetTrinityString(LANG_SLOT_NAME_RANGED);
-        case EQUIPMENT_SLOT_TABARD: return  "战袍";// session->GetTrinityString(LANG_SLOT_NAME_TABARD);
+        case EQUIPMENT_SLOT_HEAD: return  "头部";// session->GetAcoreString(LANG_SLOT_NAME_HEAD);
+        case EQUIPMENT_SLOT_SHOULDERS: return  "肩膀";// session->GetAcoreString(LANG_SLOT_NAME_SHOULDERS);
+        case EQUIPMENT_SLOT_BODY: return  "衬衫";// session->GetAcoreString(LANG_SLOT_NAME_BODY);
+        case EQUIPMENT_SLOT_CHEST: return  "胸部";// session->GetAcoreString(LANG_SLOT_NAME_CHEST);
+        case EQUIPMENT_SLOT_WAIST: return  "腰带";// session->GetAcoreString(LANG_SLOT_NAME_WAIST);
+        case EQUIPMENT_SLOT_LEGS: return  "腿部";// session->GetAcoreString(LANG_SLOT_NAME_LEGS);
+        case EQUIPMENT_SLOT_FEET: return  "脚部";// session->GetAcoreString(LANG_SLOT_NAME_FEET);
+        case EQUIPMENT_SLOT_WRISTS: return  "手腕";// session->GetAcoreString(LANG_SLOT_NAME_WRISTS);
+        case EQUIPMENT_SLOT_HANDS: return  "手部";// session->GetAcoreString(LANG_SLOT_NAME_HANDS);
+        case EQUIPMENT_SLOT_BACK: return  "背部";// session->GetAcoreString(LANG_SLOT_NAME_BACK);
+        case EQUIPMENT_SLOT_MAINHAND: return  "主手";// session->GetAcoreString(LANG_SLOT_NAME_MAINHAND);
+        case EQUIPMENT_SLOT_OFFHAND: return  "副手";// session->GetAcoreString(LANG_SLOT_NAME_OFFHAND);
+        case EQUIPMENT_SLOT_RANGED: return  "远程";// session->GetAcoreString(LANG_SLOT_NAME_RANGED);
+        case EQUIPMENT_SLOT_TABARD: return  "战袍";// session->GetAcoreString(LANG_SLOT_NAME_TABARD);
         default: return NULL;
     }
 }
@@ -289,7 +289,7 @@ void Transmogrification::SetFakeEntry(Player* player, uint32 newEntry, uint8 /*s
     UpdateItem(player, itemTransmogrified);
 }
 
-TransmogTrinityStrings Transmogrification::Transmogrify(Player* player, uint64 itemGUID, uint8 slot, /*uint32 newEntry, */bool no_cost)
+TransmogAcoreStrings Transmogrification::Transmogrify(Player* player, uint64 itemGUID, uint8 slot, /*uint32 newEntry, */bool no_cost)
 {
     int32 cost = 0;
     // slot of the transmogrified item
