@@ -32,10 +32,10 @@ UPDATE `spell_scripts` SET `datalong2` = 0 WHERE `id` = 56515;
 DELETE FROM `creature_text` WHERE `CreatureID` = 30274;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`)
 VALUES
-(30274,0,0,'Might grace you, $c. Let the Scourge feel the fury of a million lost souls!',12,0,100,0,0,0,30976,0,'Freed Crusader'),
-(30274,0,1,'Glory and strength to you, $c. I bless you with all the strength left in me. May this nightmare soon end!',12,0,100,0,0,0,30977,0,'Freed Crusader'),
-(30274,0,2,'Wisdom of the ages upon you, noble $c.',12,0,100,0,0,0,30978,0,'Freed Crusader'),
-(30274,0,3,'Thank you and farewell, friend. I must return to the Argent Vanguard.',12,0,100,0,0,0,30980,0,'Freed Crusader');
+(30274,0,0,'也许你会喜欢， $c。 让天谴军感受到成千上万灵魂的愤怒吧！',12,0,100,0,0,0,30976,0,'Freed Crusader'),
+(30274,0,1,'荣耀和力量属于你， $c。我用我所有的力量祝福你。愿这噩梦早日结束！',12,0,100,0,0,0,30977,0,'Freed Crusader'),
+(30274,0,2,'你身上有时代的智慧， 高贵的 $c。',12,0,100,0,0,0,30978,0,'Freed Crusader'),
+(30274,0,3,'谢谢你，再见了，朋友。我必须回到银色先锋。',12,0,100,0,0,0,30980,0,'Freed Crusader');
 
 --
 -- END UPDATING QUERIES
