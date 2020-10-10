@@ -127,14 +127,14 @@ int Master::Run()
     sLog->outString("  ██╔══██║ ███╔╝  ██╔══╝  ██╔══██╗██║   ██║   ██║   ██╔══██║");
     sLog->outString("  ██║  ██║███████╗███████╗██║  ██║╚██████╔╝   ██║   ██║  ██║");
     sLog->outString("  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝");
-    sLog->outString("                                ██████╗ ██████╗ ██████╗ ███████╗");
+    sLog->outString("                                 ██████╗ ██████╗ ██████╗ ███████╗");
     sLog->outString("                                ██╔════╝██╔═══██╗██╔══██╗██╔═══╝");
     sLog->outString("                                ██║     ██║   ██║██████╔╝█████╗");
     sLog->outString("                                ██║     ██║   ██║██╔══██╗██╔══╝");
     sLog->outString("                                ╚██████╗╚██████╔╝██║  ██║███████╗");
     sLog->outString("                                 ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝\n");
 
-    sLog->outString("  	  AzerothCore 3.3.5a  -  www.azerothcore.org\n");
+    sLog->outString("  	  AzerothCore 3.3.5a  -  艾泽拉斯QQ群：345411611\n");
 
     /// worldserver PID file creation
     std::string pidFile = sConfigMgr->GetStringDefault("PidFile", "");
