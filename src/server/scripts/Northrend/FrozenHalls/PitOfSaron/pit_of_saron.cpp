@@ -129,11 +129,12 @@ public:
                                 n2->GetMotionMaster()->MovePoint(1, NecrolytePos2);
                                 n2->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
                             }
-                            if (SPELL_NECROLYTE_CHANNELING)
-                            {
+                            // TODO This spell check is invalid
+//                            if (SPELL_NECROLYTE_CHANNELING)
+//                            {
                                 n1->RemoveAura(SPELL_NECROLYTE_CHANNELING);
                                 n2->RemoveAura(SPELL_NECROLYTE_CHANNELING);
-                            }
+//                            }
 
                             for (SummonList::iterator itr = summons.begin(); itr != summons.end(); ++itr)
                                 if (Creature* c = pInstance->instance->GetCreature(*itr))
@@ -398,13 +399,19 @@ public:
                     (me->GetPositionX() > 490.0f && me->GetPositionX() < 504.0f && me->GetPositionY() > 240.0f && me->GetPositionY() < 254.0f))
                 {
                     isInvincible = true;
-                    if (SPELL_NECROLYTE_CHANNELING)
-                        me->CastSpell(me, SPELL_NECROLYTE_CHANNELING, false);
+
+                    // TODO This spell check is invalid
+//                    if (SPELL_NECROLYTE_CHANNELING)
+                    me->CastSpell(me, SPELL_NECROLYTE_CHANNELING, false);
 
                     if (me->GetPositionY() < 206.0f)
+                    {
                         pInstance->SetData64(DATA_NECROLYTE_1_GUID, me->GetGUID());
+                    }
                     else
+                    {
                         pInstance->SetData64(DATA_NECROLYTE_2_GUID, me->GetGUID());
+                    }
                 }
             }
         }
@@ -417,8 +424,9 @@ public:
 
         void EnterCombat(Unit* /*who*/)
         {
-            if (SPELL_NECROLYTE_CHANNELING)
-                me->RemoveAura(SPELL_NECROLYTE_CHANNELING);
+            // TODO This spell check is invalid
+//            if (SPELL_NECROLYTE_CHANNELING)
+            me->RemoveAura(SPELL_NECROLYTE_CHANNELING);
             events.Reset();
             events.RescheduleEvent(1, 0);
             events.RescheduleEvent(2, urand(5000,9000));
@@ -1111,7 +1119,7 @@ public:
             me->DeleteThreatList();
             me->CombatStop(true);
             me->LoadCreaturesAddon(true);
-            me->SetLootRecipient(NULL);
+            me->SetLootRecipient(nullptr);
             me->ResetPlayerDamageReq();
             me->SetLastDamagedTime(0);
         }
@@ -1354,32 +1362,6 @@ public:
     }
 };
 
-const char* slaveTexts[23] = {
-"我欠你一晚上的酒钱，朋友。",
-"不要让他们中的任何一个活着。",
-"我几乎感觉不到我的手臂,但一旦找到武器,我就站在你的身旁。"
-"我简直不敢相信自己的眼睛。谢谢您。真的，谢谢。",
-"我欠你我的命。",
-"我以为我会死在这个坑里。谢谢！",
-"总有一天我会想办法报答你的，英雄",
-"我几乎放弃了希望。",
-"我在这个被遗弃的地方失去了所有的时间。你的眼睛真痛，朋友。",
-"我会和你并肩作战。不要怜悯他们。",
-"英雄们，我一喘口气就加入你们的行列。谢谢。"
-"我要回去帮助解放其余的奴隶。再次感谢你,英雄。",
-"我要回采石场前面去。为我多杀点。",
-"很高兴你能来。我不会再多活了。",
-"我和你在一起，英雄。",
-"如果我活着或死亡，我会报答你，我会的。",
-"现在是报仇的时候了。",
-"求你了，我们要向灾祸之主报仇。",
-"我们太多人死在这个坑里了。太多了。",
-"你杀坑主的时候，替我吐他的尸体，好吗？",
-"你真是一道美丽的风景……你不知道。",
-"我要给你生猴子！",
-"吻你！"
-};
-
 const Position slaveFreePos[4] = {
     {699.82f, -82.68f, 512.6f, 0.0f},
     {643.51f, 79.20f, 511.57f, 0.0f},
@@ -1434,15 +1416,15 @@ public:
                         {
                             p->RewardPlayerAndGroupAtEvent(36764, caster); // alliance
                             p->RewardPlayerAndGroupAtEvent(36770, caster); // horde
+                            
+                            target->SetUInt32Value(UNIT_NPC_EMOTESTATE, 0);
+                            if (Creature* c = target->ToCreature())
+                            {
+                                c->DespawnOrUnsummon(7000);
+                                c->AI()->Talk(0, p);
+                                c->m_Events.AddEvent(new SlaveRunEvent(*c), c->m_Events.CalculateTime(3000));
+                            }
                         }
-                    target->SetUInt32Value(UNIT_NPC_EMOTESTATE, 0);
-                    if (Creature* c = target->ToCreature())
-                    {
-                        c->DespawnOrUnsummon(7000);
-                        uint32 maxIndex = (c->getGender() == GENDER_FEMALE ? 22 : 20);
-                        c->MonsterSay(slaveTexts[urand(0, maxIndex)], LANG_UNIVERSAL, 0);
-                        c->m_Events.AddEvent(new SlaveRunEvent(*c), c->m_Events.CalculateTime(3000));
-                    }
                 }
         }
 
