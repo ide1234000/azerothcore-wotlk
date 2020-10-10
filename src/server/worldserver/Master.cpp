@@ -8,8 +8,6 @@
     \ingroup Trinityd
 */
 
-#include <ace/Sig_Handler.h>
-
 #include "Common.h"
 #include "GitRevision.h"
 #include "SignalHandler.h"
@@ -17,22 +15,22 @@
 #include "WorldRunnable.h"
 #include "WorldSocket.h"
 #include "WorldSocketMgr.h"
-#include "Configuration/Config.h"
-#include "Database/DatabaseEnv.h"
-#include "Database/DatabaseWorkerPool.h"
+#include "Config.h"
+#include "DatabaseEnv.h"
+#include "DatabaseWorkerPool.h"
 
 #include "CliRunnable.h"
 #include "Log.h"
 #include "Master.h"
 #include "RARunnable.h"
-#include "TCSoap.h"
+#include "ACSoap.h"
 #include "Timer.h"
 #include "Util.h"
 #include "RealmList.h"
 #include "ScriptMgr.h"
-
 #include "BigNumber.h"
 #include "OpenSSLCrypto.h"
+#include <ace/Sig_Handler.h>
 
 #ifdef _WIN32
 #include "ServiceWin32.h"
@@ -48,27 +46,27 @@ extern int m_ServiceStatus;
 /// Handle worldservers's termination signals
 class WorldServerSignalHandler : public acore::SignalHandler
 {
-    public:
-        virtual void HandleSignal(int sigNum)
+public:
+    virtual void HandleSignal(int sigNum)
+    {
+        switch (sigNum)
         {
-            switch (sigNum)
-            {
-                case SIGINT:
-                    World::StopNow(RESTART_EXIT_CODE);
-                    break;
-                case SIGTERM:
+            case SIGINT:
+                World::StopNow(RESTART_EXIT_CODE);
+                break;
+            case SIGTERM:
 #ifdef _WIN32
-                case SIGBREAK:
-                    if (m_ServiceStatus != 1)
+            case SIGBREAK:
+                if (m_ServiceStatus != 1)
 #endif
                     World::StopNow(SHUTDOWN_EXIT_CODE);
-                    break;
+                break;
                 /*case SIGSEGV:
                     sLog->outString("ZOMG! SIGSEGV handled!");
                     World::StopNow(SHUTDOWN_EXIT_CODE);
                     break;*/
-            }
         }
+    }
 };
 
 class FreezeDetectorRunnable : public acore::Runnable
@@ -86,7 +84,7 @@ public:
         if (!_delayTime)
             return;
 
-        sLog->outString("Starting up anti-freeze thread (%u seconds max stuck time)...", _delayTime/1000);
+        sLog->outString("Starting up anti-freeze thread (%u seconds max stuck time)...", _delayTime / 1000);
         while (!World::IsStopped())
         {
             uint32 curtime = getMSTime();
@@ -107,6 +105,12 @@ public:
     }
 };
 
+Master* Master::instance()
+{
+    static Master instance;
+    return &instance;
+}
+
 /// Main function
 int Master::Run()
 {
@@ -117,16 +121,16 @@ int Master::Run()
     sLog->outString("%s (worldserver-daemon)", GitRevision::GetFullVersion());
     sLog->outString("<Ctrl-C> to stop.\n");
 
-    sLog->outString("   █████╗ ███████╗███████╗██████╗  ██████╗ ████████╗██╗  ██╗");           
-    sLog->outString("  ██╔══██╗╚══███╔╝██╔════╝██╔══██╗██╔═══██╗╚══██╔══╝██║  ██║");           
-    sLog->outString("  ███████║  ███╔╝ █████╗  ██████╔╝██║   ██║   ██║   ███████║");           
-    sLog->outString("  ██╔══██║ ███╔╝  ██╔══╝  ██╔══██╗██║   ██║   ██║   ██╔══██║");           
-    sLog->outString("  ██║  ██║███████╗███████╗██║  ██║╚██████╔╝   ██║   ██║  ██║");           
-    sLog->outString("  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝");                                                                
-    sLog->outString("                                 ██████╗ ██████╗ ██████╗ ███████╗");
+    sLog->outString("   █████╗ ███████╗███████╗██████╗  ██████╗ ████████╗██╗  ██╗");
+    sLog->outString("  ██╔══██╗╚══███╔╝██╔════╝██╔══██╗██╔═══██╗╚══██╔══╝██║  ██║");
+    sLog->outString("  ███████║  ███╔╝ █████╗  ██████╔╝██║   ██║   ██║   ███████║");
+    sLog->outString("  ██╔══██║ ███╔╝  ██╔══╝  ██╔══██╗██║   ██║   ██║   ██╔══██║");
+    sLog->outString("  ██║  ██║███████╗███████╗██║  ██║╚██████╔╝   ██║   ██║  ██║");
+    sLog->outString("  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝");
+    sLog->outString("                                ██████╗ ██████╗ ██████╗ ███████╗");
     sLog->outString("                                ██╔════╝██╔═══██╗██╔══██╗██╔═══╝");
-    sLog->outString("                                ██║     ██║   ██║██████╔╝█████╗");  
-    sLog->outString("                                ██║     ██║   ██║██╔══██╗██╔══╝");  
+    sLog->outString("                                ██║     ██║   ██║██████╔╝█████╗");
+    sLog->outString("                                ██║     ██║   ██║██╔══██╗██╔══╝");
     sLog->outString("                                ╚██████╗╚██████╔╝██║  ██║███████╗");
     sLog->outString("                                 ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝\n");
 
@@ -137,10 +141,10 @@ int Master::Run()
     if (!pidFile.empty())
     {
         if (uint32 pid = CreatePIDFile(pidFile))
-            sLog->outString("Daemon PID: %u\n", pid);
+            sLog->outError("Daemon PID: %u\n", pid); // outError for red color in console
         else
         {
-            sLog->outString("Cannot create PID file %s.\n", pidFile.c_str());
+            sLog->outError("Cannot create PID file %s (possible error: permission)\n", pidFile.c_str());
             return 1;
         }
     }
@@ -152,8 +156,8 @@ int Master::Run()
     // set server offline (not connectable)
     LoginDatabase.DirectPExecute("UPDATE realmlist SET flag = (flag & ~%u) | %u WHERE id = '%d'", REALM_FLAG_OFFLINE, REALM_FLAG_INVALID, realmID);
 
-    //set module config file list
-    sWorld->SetConfigFileList(CONFIG_FILE_LIST);
+    // Loading modules configs
+    sConfigMgr->LoadModulesConfigs();
 
     ///- Initialize the World
     sWorld->SetInitialWorldSettings();
@@ -162,9 +166,9 @@ int Master::Run()
 
     ///- Initialize the signal handlers
     WorldServerSignalHandler signalINT, signalTERM; //, signalSEGV
-    #ifdef _WIN32
+#ifdef _WIN32
     WorldServerSignalHandler signalBREAK;
-    #endif /* _WIN32 */
+#endif /* _WIN32 */
 
     ///- Register worldserver's signal handlers
     ACE_Sig_Handler handle;
@@ -179,7 +183,7 @@ int Master::Run()
     acore::Thread worldThread(new WorldRunnable);
     worldThread.setPriority(acore::Priority_Highest);
 
-    acore::Thread* cliThread = NULL;
+    acore::Thread* cliThread = nullptr;
 
 #ifdef _WIN32
     if (sConfigMgr->GetBoolDefault("Console.Enable", true) && (m_ServiceStatus == -1)/* need disable console in service mode*/)
@@ -198,25 +202,25 @@ int Master::Run()
     auctionLising_thread.setPriority(acore::Priority_High);
 
 #if defined(_WIN32) || defined(__linux__)
-    
+
 
     ///- Handle affinity for multiple processors and process priority
     uint32 affinity = sConfigMgr->GetIntDefault("UseProcessors", 0);
     bool highPriority = sConfigMgr->GetBoolDefault("ProcessPriority", false);
 
 #ifdef _WIN32 // Windows
-    
+
     HANDLE hProcess = GetCurrentProcess();
-    
+
     if (affinity > 0)
     {
         ULONG_PTR appAff;
         ULONG_PTR sysAff;
-        
+
         if (GetProcessAffinityMask(hProcess, &appAff, &sysAff))
         {
             ULONG_PTR currentAffinity = affinity & appAff;            // remove non accessible processors
-            
+
             if (!currentAffinity)
                 sLog->outError("Processors marked in UseProcessors bitmask (hex) %x are not accessible for the worldserver. Accessible processors bitmask (hex): %x", affinity, appAff);
             else if (SetProcessAffinityMask(hProcess, currentAffinity))
@@ -225,7 +229,7 @@ int Master::Run()
                 sLog->outError("Can't set used processors (hex): %x", currentAffinity);
         }
     }
-    
+
     if (highPriority)
     {
         if (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS))
@@ -233,9 +237,9 @@ int Master::Run()
         else
             sLog->outError("Can't set worldserver process priority class.");
     }
-    
+
 #else // Linux
-    
+
     if (affinity > 0)
     {
         cpu_set_t mask;
@@ -262,24 +266,24 @@ int Master::Run()
         else
             sLog->outString("worldserver process priority class set to %i", getpriority(PRIO_PROCESS, 0));
     }
-    
+
 #endif
 #endif
 
     // Start soap serving thread
-    acore::Thread* soapThread = NULL;
+    acore::Thread* soapThread = nullptr;
     if (sConfigMgr->GetBoolDefault("SOAP.Enabled", false))
     {
-        TCSoapRunnable* runnable = new TCSoapRunnable();
+        ACSoapRunnable* runnable = new ACSoapRunnable();
         runnable->SetListenArguments(sConfigMgr->GetStringDefault("SOAP.IP", "127.0.0.1"), uint16(sConfigMgr->GetIntDefault("SOAP.Port", 7878)));
         soapThread = new acore::Thread(runnable);
     }
 
     // Start up freeze catcher thread
-    acore::Thread* freezeThread = NULL;
+    acore::Thread* freezeThread = nullptr;
     if (uint32 freezeDelay = sConfigMgr->GetIntDefault("MaxCoreStuckTime", 0))
     {
-        FreezeDetectorRunnable* runnable = new FreezeDetectorRunnable(freezeDelay*1000);
+        FreezeDetectorRunnable* runnable = new FreezeDetectorRunnable(freezeDelay * 1000);
         freezeThread = new acore::Thread(runnable);
         freezeThread->setPriority(acore::Priority_Highest);
     }
@@ -330,7 +334,7 @@ int Master::Run()
 
     if (cliThread)
     {
-        #ifdef _WIN32
+#ifdef _WIN32
 
         // this only way to terminate CLI thread exist at Win32 (alt. way exist only in Windows Vista API)
         //_exit(1);
@@ -369,11 +373,11 @@ int Master::Run()
 
         cliThread->wait();
 
-        #else
+#else
 
         cliThread->destroy();
 
-        #endif
+#endif
 
         delete cliThread;
     }
@@ -407,7 +411,7 @@ bool Master::_StartDB()
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError("World database: invalid number of worker threads specified. "
-            "Please pick a value between 1 and 32.");
+                       "Please pick a value between 1 and 32.");
         return false;
     }
 
@@ -431,7 +435,7 @@ bool Master::_StartDB()
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError("Character database: invalid number of worker threads specified. "
-            "Please pick a value between 1 and 32.");
+                       "Please pick a value between 1 and 32.");
         return false;
     }
 
@@ -456,7 +460,7 @@ bool Master::_StartDB()
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError("Login database: invalid number of worker threads specified. "
-            "Please pick a value between 1 and 32.");
+                       "Please pick a value between 1 and 32.");
         return false;
     }
 
