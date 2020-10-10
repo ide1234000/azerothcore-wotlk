@@ -84,7 +84,7 @@ Channel::Channel(std::string const& name, uint32 channelId, uint32 channelDBId, 
 bool Channel::IsBanned(uint64 guid) const
 {
     BannedContainer::const_iterator itr = bannedStore.find(GUID_LOPART(guid));
-    return itr != bannedStore.end() && itr->second > time(NULL);
+    return itr != bannedStore.end() && itr->second > time(nullptr);
 }
 
 void Channel::UpdateChannelInDB() const
@@ -417,8 +417,8 @@ void Channel::KickOrBan(Player const* player, std::string const& badname, bool b
     {
         if (!IsBanned(victim))
         {
-            bannedStore[GUID_LOPART(victim)] = time(NULL) + CHANNEL_BAN_DURATION;
-            AddChannelBanToDB(GUID_LOPART(victim), time(NULL) + CHANNEL_BAN_DURATION);
+            bannedStore[GUID_LOPART(victim)] = time(nullptr) + CHANNEL_BAN_DURATION;
+            AddChannelBanToDB(GUID_LOPART(victim), time(nullptr) + CHANNEL_BAN_DURATION);
 
             if (notify)
             {
@@ -790,7 +790,7 @@ void Channel::Say(uint64 guid, std::string const& what, uint32 lang)
 
     Player* player = pinfo.plrPtr;
 
-    if (player && !player->GetSession()->GetSecurity()) // pussywizard: prevent spam on populated channels
+    if (player && player->GetSession()->GetSecurity() == AccountTypes::SEC_PLAYER) // pussywizard: prevent spam on populated channels
     {
         uint32 speakDelay = 0;
         if (_channelRights.speakDelay > 0)

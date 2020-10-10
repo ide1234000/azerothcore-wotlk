@@ -225,7 +225,7 @@ Unit* Vehicle::GetPassenger(int8 seatId) const
 {
     SeatMap::const_iterator seat = Seats.find(seatId);
     if (seat == Seats.end())
-        return NULL;
+        return nullptr;
 
     return ObjectAccessor::GetUnit(*GetBase(), seat->second.Passenger.Guid);
 }
@@ -365,7 +365,7 @@ bool Vehicle::AddPassenger(Unit* unit, int8 seatId)
         }
     }
 
-    if (!_me->IsInWorld() || _me->IsDuringRemoveFromWorld())
+    if (!_me || !_me->IsInWorld() || _me->IsDuringRemoveFromWorld())
         return false;
 
     // Xinef: moved from unit.cpp, if aura passes seatId == -1 (choose automaticly) we wont get appropriate flags
@@ -587,7 +587,7 @@ VehicleSeatEntry const* Vehicle::GetSeatForPassenger(Unit const* passenger)
         if (itr->second.Passenger.Guid == passenger->GetGUID())
             return itr->second.SeatInfo;
 
-    return NULL;
+    return nullptr;
 }
 
 SeatMap::iterator Vehicle::GetSeatIteratorForPassenger(Unit* passenger)

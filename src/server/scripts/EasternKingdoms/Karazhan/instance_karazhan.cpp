@@ -42,19 +42,21 @@ public:
         {
             switch (creature->GetEntry())
             {
-            case NPC_KILREK:
-                m_uiKilrekGUID = creature->GetGUID();
-                break;
-            case NPC_TERESTIAN_ILLHOOF:
-                m_uiTerestianGUID = creature->GetGUID();
-                break;
-            case NPC_MOROES:
-                m_uiMoroesGUID = creature->GetGUID();
-                break;
-            case NPC_NIGHTBANE:
-                m_uiNightBaneGUID = creature->GetGUID();
-            case NPC_RELAY:
-                m_uiRelayGUID = creature->GetGUID();
+                case NPC_KILREK:
+                    m_uiKilrekGUID = creature->GetGUID();
+                    break;
+                case NPC_TERESTIAN_ILLHOOF:
+                    m_uiTerestianGUID = creature->GetGUID();
+                    break;
+                case NPC_MOROES:
+                    m_uiMoroesGUID = creature->GetGUID();
+                    break;
+                case NPC_NIGHTBANE:
+                    m_uiNightBaneGUID = creature->GetGUID();
+                    break;
+                case NPC_RELAY:
+                    m_uiRelayGUID = creature->GetGUID();
+                    break;
             }
         }
 
@@ -168,7 +170,7 @@ public:
                 break;
             case GO_MASSIVE_DOOR:
                 m_uiMassiveDoor = go->GetGUID();
-                if (GetBossState(DATA_ARAN) == !IN_PROGRESS)
+                if (GetBossState(DATA_ARAN) != IN_PROGRESS)
                     go->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
                 else
                     go->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
@@ -181,7 +183,7 @@ public:
                 break;
             case GO_NETHERSPACE_DOOR:
                 m_uiNetherspaceDoor = go->GetGUID();
-                if (GetBossState(DATA_PRINCE) == !IN_PROGRESS)
+                if (GetBossState(DATA_PRINCE) != IN_PROGRESS)
                     go->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
                 else
                     go->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);

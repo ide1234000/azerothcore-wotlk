@@ -197,6 +197,7 @@ void BattlegroundAV::HandleQuestComplete(uint32 questid, Player* player)
         case AV_QUEST_A_BOSS1:
         case AV_QUEST_H_BOSS1:
             m_Team_QuestStatus[teamId][4] += 9; //you can turn in 10 or 1 item..
+            [[fallthrough]];
         case AV_QUEST_A_BOSS2:
         case AV_QUEST_H_BOSS2:
             m_Team_QuestStatus[teamId][4]++;
@@ -290,7 +291,7 @@ void BattlegroundAV::UpdateScore(TeamId teamId, int16 points)
 Creature* BattlegroundAV::AddAVCreature(uint16 cinfoid, uint16 type)
 {
     bool isStatic = false;
-    Creature* creature = NULL;
+    Creature* creature = nullptr;
     ASSERT(type <= AV_CPLACE_MAX + AV_STATICCPLACE_MAX);
     if (type >= AV_CPLACE_MAX) //static
     {
@@ -314,7 +315,7 @@ Creature* BattlegroundAV::AddAVCreature(uint16 cinfoid, uint16 type)
                                BG_AV_CreaturePos[type][3]);
     }
     if (!creature)
-        return NULL;
+        return nullptr;
     if (creature->GetEntry() == BG_AV_CreatureInfo[AV_NPC_A_CAPTAIN] || creature->GetEntry() == BG_AV_CreatureInfo[AV_NPC_H_CAPTAIN])
         creature->SetRespawnDelay(RESPAWN_ONE_DAY); // TODO: look if this can be done by database + also add this for the wingcommanders
 
@@ -325,9 +326,9 @@ Creature* BattlegroundAV::AddAVCreature(uint16 cinfoid, uint16 type)
             || (cinfoid >= AV_NPC_H_GRAVEDEFENSE0 && cinfoid <= AV_NPC_H_GRAVEDEFENSE3)))
         {
             CreatureData &data = sObjectMgr->NewOrExistCreatureData(creature->GetDBTableGUIDLow());
-            data.spawndist = 5;
+            data.wander_distance = 5;
         }
-        //else spawndist will be 15, so creatures move maximum=10
+        //else wander_distance will be 15, so creatures move maximum=10
         //creature->SetDefaultMovementType(RANDOM_MOTION_TYPE);
         creature->GetMotionMaster()->Initialize();
         creature->setDeathState(JUST_DIED);
@@ -437,6 +438,9 @@ void BattlegroundAV::PostUpdateImpl(uint32 diff)
 
 void BattlegroundAV::StartingEventCloseDoors()
 {
+    SpawnBGObject(BG_AV_OBJECT_DOOR_A, RESPAWN_IMMEDIATELY);
+    SpawnBGObject(BG_AV_OBJECT_DOOR_H, RESPAWN_IMMEDIATELY);
+
     DoorClose(BG_AV_OBJECT_DOOR_A);
     DoorClose(BG_AV_OBJECT_DOOR_H);
 }
@@ -547,12 +551,14 @@ void BattlegroundAV::HandleAreaTrigger(Player* player, uint32 trigger)
         case 3331:
             //player->Unmount();
             break;
+        default:
+            break;
     }
 }
 
 void BattlegroundAV::UpdatePlayerScore(Player* player, uint32 type, uint32 value, bool doAddHonor)
 {
-    BattlegroundScoreMap::iterator itr = PlayerScores.find(player->GetGUID());
+    auto itr = PlayerScores.find(player->GetGUID());
     if (itr == PlayerScores.end())
         return;
 
@@ -741,7 +747,6 @@ void BattlegroundAV::ChangeMineOwner(uint8 mine, TeamId teamId, bool initial)
                 YellToAll(creature, LANG_BG_AV_S_MINE_BOSS_CLAIMS, LANG_UNIVERSAL);
         }
     }
-    return;
 }
 
 bool BattlegroundAV::PlayerCanDoMineQuest(int32 GOId, TeamId teamId)
@@ -1177,15 +1182,14 @@ void BattlegroundAV::SendMineWorldStates(uint32 mine)
 
 GraveyardStruct const* BattlegroundAV::GetClosestGraveyard(Player* player)
 {
-    GraveyardStruct const* pGraveyard = NULL;
-    GraveyardStruct const* entry = NULL;
+    GraveyardStruct const* entry = nullptr;
     float dist = 0;
     float minDist = 0;
     float x, y;
 
     player->GetPosition(x, y);
 
-    pGraveyard = sGraveyard->GetGraveyard(BG_AV_GraveyardIds[player->GetTeamId()+7]);
+    GraveyardStruct const* pGraveyard = sGraveyard->GetGraveyard(BG_AV_GraveyardIds[player->GetTeamId()+7]);
     minDist = (pGraveyard->x - x)*(pGraveyard->x - x)+(pGraveyard->y - y)*(pGraveyard->y - y);
 
     for (uint8 i = BG_AV_NODES_FIRSTAID_STATION; i <= BG_AV_NODES_FROSTWOLF_HUT; ++i)
@@ -1208,15 +1212,6 @@ GraveyardStruct const* BattlegroundAV::GetClosestGraveyard(Player* player)
 bool BattlegroundAV::SetupBattleground()
 {
     // Create starting objects
-    if (
-       // alliance gates
-        !AddObject(BG_AV_OBJECT_DOOR_A, BG_AV_OBJECTID_GATE_A, BG_AV_DoorPositons[0][0], BG_AV_DoorPositons[0][1], BG_AV_DoorPositons[0][2], BG_AV_DoorPositons[0][3], 0, 0, sin(BG_AV_DoorPositons[0][3]/2), cos(BG_AV_DoorPositons[0][3]/2), RESPAWN_IMMEDIATELY)
-        // horde gates
-        || !AddObject(BG_AV_OBJECT_DOOR_H, BG_AV_OBJECTID_GATE_H, BG_AV_DoorPositons[1][0], BG_AV_DoorPositons[1][1], BG_AV_DoorPositons[1][2], BG_AV_DoorPositons[1][3], 0, 0, sin(BG_AV_DoorPositons[1][3]/2), cos(BG_AV_DoorPositons[1][3]/2), RESPAWN_IMMEDIATELY))
-    {
-        sLog->outErrorDb("BatteGroundAV: Failed to spawn some object Battleground not created!1");
-        return false;
-    }
 
     //spawn node-objects
     for (uint8 i = BG_AV_NODES_FIRSTAID_STATION; i < BG_AV_NODES_MAX; ++i)
@@ -1387,9 +1382,7 @@ bool BattlegroundAV::SetupBattleground()
     }
 
     //snowfall and the doors
-    for (i = BG_AV_OBJECT_FLAG_N_SNOWFALL_GRAVE; i <= BG_AV_OBJECT_DOOR_A; i++)
-        SpawnBGObject(i, RESPAWN_IMMEDIATELY);
-
+    SpawnBGObject(BG_AV_OBJECT_FLAG_N_SNOWFALL_GRAVE, RESPAWN_IMMEDIATELY);
     SpawnBGObject(BG_AV_OBJECT_AURA_N_SNOWFALL_GRAVE, RESPAWN_IMMEDIATELY);
 
     // Handpacked snowdrift, only during holiday
@@ -1429,6 +1422,17 @@ bool BattlegroundAV::SetupBattleground()
     for (i = AV_NPC_A_MARSHAL_SOUTH; i <= AV_NPC_H_MARSHAL_WTOWER; i++)
         AddAVCreature(i, AV_CPLACE_A_MARSHAL_SOUTH + (i - AV_NPC_A_MARSHAL_SOUTH));
     AddAVCreature(AV_NPC_HERALD, AV_CPLACE_HERALD);
+
+    if (
+        // alliance gates
+        !AddObject(BG_AV_OBJECT_DOOR_A, BG_AV_OBJECTID_GATE_A, BG_AV_DoorPositons[0][0], BG_AV_DoorPositons[0][1], BG_AV_DoorPositons[0][2], BG_AV_DoorPositons[0][3], 0, 0, sin(BG_AV_DoorPositons[0][3]/2), cos(BG_AV_DoorPositons[0][3]/2), RESPAWN_IMMEDIATELY)
+        // horde gates
+        || !AddObject(BG_AV_OBJECT_DOOR_H, BG_AV_OBJECTID_GATE_H, BG_AV_DoorPositons[1][0], BG_AV_DoorPositons[1][1], BG_AV_DoorPositons[1][2], BG_AV_DoorPositons[1][3], 0, 0, sin(BG_AV_DoorPositons[1][3]/2), cos(BG_AV_DoorPositons[1][3]/2), RESPAWN_IMMEDIATELY))
+    {
+        sLog->outErrorDb("BatteGroundAV: Failed to spawn some object Battleground not created!1");
+        return false;
+    }
+
     return true;
 }
 
@@ -1553,8 +1557,8 @@ void BattlegroundAV::ResetBGSubclass()
 
 bool BattlegroundAV::IsBothMinesControlledByTeam(TeamId teamId) const
 {
-    for (uint8 mine = 0; mine < 2; mine++)
-        if (m_Mine_Owner[mine] != teamId)
+    for (auto mine : m_Mine_Owner)
+        if (mine != teamId)
             return false;
 
     return true;
@@ -1579,10 +1583,7 @@ bool BattlegroundAV::IsAllTowersControlledAndCaptainAlive(TeamId teamId) const
             if (m_Nodes[i].State != POINT_DESTROYED)
                 return false;
 
-        if (!m_CaptainAlive[0])
-            return false;
-
-        return true;
+        return m_CaptainAlive[0];
     }
     else if (teamId == TEAM_HORDE)
     {
@@ -1601,10 +1602,7 @@ bool BattlegroundAV::IsAllTowersControlledAndCaptainAlive(TeamId teamId) const
             if (m_Nodes[i].State != POINT_DESTROYED)
                 return false;
 
-        if (!m_CaptainAlive[1])
-            return false;
-
-        return true;
+        return m_CaptainAlive[1];
     }
 
     return false;

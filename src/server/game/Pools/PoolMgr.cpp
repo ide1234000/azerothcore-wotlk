@@ -166,7 +166,7 @@ PoolObject* PoolGroup<T>::RollOne(ActivePoolData& spawns, uint32 triggerFrom)
            return &EqualChanced[index];
     }
 
-    return NULL;
+    return nullptr;
 }
 
 // Main method to despawn a creature or gameobject in a pool
@@ -535,6 +535,12 @@ void PoolGroup<Quest>::ReSpawn1Object(PoolObject* /*obj*/)
 
 PoolMgr::PoolMgr()
 {
+}
+
+PoolMgr* PoolMgr::instance()
+{
+    static PoolMgr instance;
+    return &instance;
 }
 
 void PoolMgr::Initialize()

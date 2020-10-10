@@ -49,7 +49,7 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
             {
                 // don't allow 0 items (it's checked during table load)
                 ASSERT(ConditionValue2);
-                bool checkBank = ConditionValue3 ? true : false;
+                bool checkBank = !!ConditionValue3;
                 condMeets = player->HasItemCount(ConditionValue1, ConditionValue2, checkBank);
             }
             break;
@@ -207,12 +207,12 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
         }
         case CONDITION_NEAR_CREATURE:
         {
-            condMeets = GetClosestCreatureWithEntry(object, ConditionValue1, (float)ConditionValue2, !ConditionValue3) ? true : false;
+            condMeets = !!GetClosestCreatureWithEntry(object, ConditionValue1, (float)ConditionValue2, !ConditionValue3);
             break;
         }
         case CONDITION_NEAR_GAMEOBJECT:
         {
-            condMeets = GetClosestGameObjectWithEntry(object, ConditionValue1, (float)ConditionValue2) ? true : false;
+            condMeets = !!GetClosestGameObjectWithEntry(object, ConditionValue1, (float)ConditionValue2);
             break;
         }
         case CONDITION_OBJECT_ENTRY_GUID:
@@ -595,6 +595,12 @@ ConditionMgr::ConditionMgr()
 ConditionMgr::~ConditionMgr()
 {
     Clean();
+}
+
+ConditionMgr* ConditionMgr::instance()
+{
+    static ConditionMgr instance;
+    return &instance;
 }
 
 ConditionList ConditionMgr::GetConditionReferences(uint32 refId)
@@ -1241,7 +1247,8 @@ bool ConditionMgr::addToSpellImplicitTargetConditions(Condition* cond)
                 if (!assigned)
                     delete sharedList;
             }
-            sharedList->push_back(cond);
+            if (sharedList)
+                sharedList->push_back(cond);
             break;
         }
     }
@@ -1545,33 +1552,17 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
             }
             break;
         }
-        case CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
+        case CONDITION_SOURCE_TYPE_QUEST_AVAILABLE:
             if (!sObjectMgr->GetQuestTemplate(cond->SourceEntry))
             {
-                sLog->outErrorDb("CONDITION_SOURCE_TYPE_QUEST_ACCEPT specifies non-existing quest (%u), skipped", cond->SourceEntry);
+                sLog->outErrorDb("CONDITION_SOURCE_TYPE_QUEST_AVAILABLE specifies non-existing quest (%u), skipped", cond->SourceEntry);
                 return false;
             }
             break;
-        case CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-            if (!sObjectMgr->GetQuestTemplate(cond->SourceEntry))
-            {
-                sLog->outErrorDb("CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK specifies non-existing quest (%u), skipped", cond->SourceEntry);
-                return false;
-            }
+        case CONDITION_SOURCE_TYPE_UNUSED_20:
+            sLog->outErrorDb("CONDITION_SOURCE_TYPE_UNUSED_20 is not in use. SourceEntry = (%u), skipped", cond->SourceEntry);
             break;
         case CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
-            if (!sObjectMgr->GetCreatureTemplate(cond->SourceGroup))
-            {
-                sLog->outErrorDb("SourceEntry %u in `condition` table, does not exist in `creature_template`, ignoring.", cond->SourceGroup);
-                return false;
-            }
-
-            if (!sSpellMgr->GetSpellInfo(cond->SourceEntry))
-            {
-                sLog->outErrorDb("SourceEntry %u in `condition` table, does not exist in `spell.dbc`, ignoring.", cond->SourceEntry);
-                return false;
-            }
-            break;
         case CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
             if (!sObjectMgr->GetCreatureTemplate(cond->SourceGroup))
             {

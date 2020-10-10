@@ -7,10 +7,8 @@
 #ifndef _REALMLIST_H
 #define _REALMLIST_H
 
-#include <ace/Singleton.h>
-#include <ace/Null_Mutex.h>
-#include <ace/INET_Addr.h>
 #include "Common.h"
+#include <ace/INET_Addr.h>
 
 enum RealmFlags
 {
@@ -50,10 +48,10 @@ public:
     RealmList();
     ~RealmList() { }
 
+    static RealmList* instance();
+
     void Initialize(uint32 updateInterval);
-
     void UpdateIfNeed();
-
     void AddRealm(const Realm& NewRealm) { m_realms[NewRealm.name] = NewRealm; }
 
     RealmMap::const_iterator begin() const { return m_realms.begin(); }
@@ -61,7 +59,7 @@ public:
     uint32 size() const { return m_realms.size(); }
 
 private:
-    void UpdateRealms(bool init=false);
+    void UpdateRealms(bool init = false);
     void UpdateRealm(uint32 id, const std::string& name, ACE_INET_Addr const& address, ACE_INET_Addr const& localAddr, ACE_INET_Addr const& localSubmask, uint8 icon, RealmFlags flag, uint8 timezone, AccountTypes allowedSecurityLevel, float popu, uint32 build);
 
     RealmMap m_realms;
@@ -69,6 +67,6 @@ private:
     time_t   m_NextUpdateTime;
 };
 
-#define sRealmList ACE_Singleton<RealmList, ACE_Null_Mutex>::instance()
+#define sRealmList RealmList::instance()
 
 #endif

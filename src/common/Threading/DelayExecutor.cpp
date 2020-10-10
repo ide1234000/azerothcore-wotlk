@@ -1,17 +1,16 @@
-#include <ace/Singleton.h>
 #include <ace/Thread_Mutex.h>
 #include <ace/Log_Msg.h>
 #include "Threading.h"
-
 #include "DelayExecutor.h"
 
 DelayExecutor* DelayExecutor::instance()
 {
-    return ACE_Singleton<DelayExecutor, ACE_Thread_Mutex>::instance();
+    static DelayExecutor instance;
+    return &instance;
 }
 
 DelayExecutor::DelayExecutor()
-    : pre_svc_hook_(0), post_svc_hook_(0), activated_(false), mqueue_(1*1024*1024, 1*1024*1024), queue_(&mqueue_)
+    : pre_svc_hook_(0), post_svc_hook_(0), activated_(false), mqueue_(1 * 1024 * 1024, 1 * 1024 * 1024), queue_(&mqueue_)
 {
 }
 
