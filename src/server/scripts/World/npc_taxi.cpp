@@ -18,32 +18,30 @@ EndScriptData
 #include "Player.h"
 #include "WorldSession.h"
 
-#define GOSSIP_SUSURRUS         "我准备好了。"
-#define GOSSIP_NETHER_DRAKE     "我准备好了！带我上去，龙！"
-#define GOSSIP_IRONWING         "我想在暴风港周围转机。"
-#define GOSSIP_DABIREE1         "送我到默基和沙亚达拉门"
-#define GOSSIP_DABIREE2         "飞到粉碎点"
-#define GOSSIP_WINDBELLOW1      "把我带到深渊架子"
-#define GOSSIP_WINDBELLOW2      "飞到荣誉点"
-#define GOSSIP_BRACK1           "送我到默基和沙亚达拉门"
-#define GOSSIP_BRACK2           "把我带到深渊架子"
-#define GOSSIP_BRACK3           "把我带到破骨柱"
-#define GOSSIP_IRENA            "请送我去斯凯蒂"
-#define GOSSIP_CLOUDBREAKER1    "说到行动，我被命令进行空袭。"
-#define GOSSIP_CLOUDBREAKER2    "我需要拦截道恩布莱德的增援部队。"
-#define GOSSIP_DRAGONHAWK       "<骑龙鹰到太阳那边去>"
-#define GOSSIP_VERONIA          "请载我到马纳福吉科鲁"
-#define GOSSIP_DEESAK           "请把我带到奥格里拉"
-#define GOSSIP_AFRASASTRASZ1    "我想坐飞机到地面去，阿芙拉斯特拉兹领主。"
-#define GOSSIP_AFRASASTRASZ2    "执事大人，我必须到圣殿的上层去。"
-#define GOSSIP_TARIOLSTRASZ1    "执事大人，我必须到圣殿的上层去。"
-#define GOSSIP_TARIOLSTRASZ2    "你能不能把一只雄鹿带到寺庙中间去阿弗拉斯特拉斯勋爵那里？"
-#define GOSSIP_TORASTRASZA1     "我想在神庙的中央看到阿弗拉萨斯特拉兹的领主。"
-#define GOSSIP_TORASTRASZA2     "是的，请带我回到神殿的底层。"
-#define GOSSIP_CRIMSONWING      "<骑车前往阿尔卡兹岛>"
-#define GOSSIP_WILLIAMKEILAR1   "带我去北关塔。"
-#define GOSSIP_WILLIAMKEILAR2   "带我去东墙大厦。"
-#define GOSSIP_WILLIAMKEILAR3   "带我去皇冠塔。"
+#define GOSSIP_SUSURRUS         "I am ready."
+#define GOSSIP_NETHER_DRAKE     "I'm ready to fly! Take me up, dragon!"
+#define GOSSIP_IRONWING         "I'd like to take a flight around Stormwind Harbor."
+#define GOSSIP_DABIREE1         "Fly me to Murketh and Shaadraz Gateways"
+#define GOSSIP_DABIREE2         "Fly me to Shatter Point"
+#define GOSSIP_BRACK1           "Fly me to Murketh and Shaadraz Gateways"
+#define GOSSIP_BRACK2           "Fly me to The Abyssal Shelf"
+#define GOSSIP_BRACK3           "Fly me to Spinebreaker Post"
+#define GOSSIP_IRENA            "Fly me to Skettis please"
+#define GOSSIP_CLOUDBREAKER1    "Speaking of action, I've been ordered to undertake an air strike."
+#define GOSSIP_CLOUDBREAKER2    "I need to intercept the Dawnblade reinforcements."
+#define GOSSIP_DRAGONHAWK       "<Ride the dragonhawk to Sun's Reach>"
+#define GOSSIP_VERONIA          "Fly me to Manaforge Coruu please"
+#define GOSSIP_DEESAK           "Fly me to Ogri'la please"
+#define GOSSIP_AFRASASTRASZ1    "I would like to take a flight to the ground, Lord Of Afrasastrasz."
+#define GOSSIP_AFRASASTRASZ2    "My Lord, I must go to the upper floor of the temple."
+#define GOSSIP_TARIOLSTRASZ1    "My Lord, I must go to the upper floor of the temple."
+#define GOSSIP_TARIOLSTRASZ2    "Can you spare a drake to travel to Lord Of Afrasastrasz, in the middle of the temple?"
+#define GOSSIP_TORASTRASZA1     "I would like to see Lord Of Afrasastrasz, in the middle of the temple."
+#define GOSSIP_TORASTRASZA2     "Yes, Please. I would like to return to the ground floor of the temple."
+#define GOSSIP_CRIMSONWING      "<Ride the gryphons to Survey Alcaz Island>"
+#define GOSSIP_WILLIAMKEILAR1   "Take me to Northpass Tower."
+#define GOSSIP_WILLIAMKEILAR2   "Take me to Eastwall Tower."
+#define GOSSIP_WILLIAMKEILAR3   "Take me to Crown Guard Tower."
 
 class npc_taxi : public CreatureScript
 {
@@ -76,15 +74,6 @@ public:
             //Shatter Point
             if (!player->GetQuestRewardStatus(10340))
                 AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_DABIREE2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
-            break;
-        case 20235: // Hellfire Peninsula - Gryphoneer Windbellow
-            //Mission: The Abyssal Shelf || Return to the Abyssal Shelf
-            if (player->GetQuestStatus(10163) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(10346) == QUEST_STATUS_INCOMPLETE)
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_WINDBELLOW1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 6);
-
-            //Go to the Front
-            if (player->GetQuestStatus(10382) != QUEST_STATUS_NONE && !player->GetQuestRewardStatus(10382))
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_WINDBELLOW2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7);
             break;
         case 19401: // Hellfire Peninsula - Wing Commander Brack
             //Mission: The Murketh and Shaadraz Gateways
@@ -181,14 +170,6 @@ public:
         case GOSSIP_ACTION_INFO_DEF + 5:
             CloseGossipMenuFor(player);
             player->CastSpell(player, 35069, true);               //TaxiPath 612 (Taxi - Hellfire Peninsula - Expedition Point to Shatter Point)
-            break;
-        case GOSSIP_ACTION_INFO_DEF + 6:
-            CloseGossipMenuFor(player);
-            player->CastSpell(player, 33899, true);               //TaxiPath 589 (Aerial Assault Flight (Alliance))
-            break;
-        case GOSSIP_ACTION_INFO_DEF + 7:
-            CloseGossipMenuFor(player);
-            player->CastSpell(player, 35065, true);               //TaxiPath 607 (Taxi - Hellfire Peninsula - Shatter Point to Beach Head)
             break;
         case GOSSIP_ACTION_INFO_DEF + 8:
             CloseGossipMenuFor(player);
