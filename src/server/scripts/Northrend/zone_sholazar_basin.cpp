@@ -146,7 +146,7 @@ public:
 
         void EnterCombat(Unit*  /*who*/)
         {
-            me->MonsterYell("Ah, the heroes. Your little friends said you would come. This certainly saves me the trouble of hunting you down myself.", LANG_UNIVERSAL, 0);
+            me->MonsterYell("啊，英雄们。你的小朋友说你会来的。这当然省去了我自己追捕你的麻烦。", LANG_UNIVERSAL, 0);
             me->CastSpell(me, SPELL_ARTRUIS_ICY_VEINS, true);
             events.RescheduleEvent(EVENT_CAST_FROST_BOLT, 4000);
             events.RescheduleEvent(EVENT_CAST_FROST_NOVA, 15000);
@@ -190,7 +190,7 @@ public:
                         }
                         else if (action == ACTION_MAKE_FRIENDLY && me->GetVictim())
                         {
-                            minion->MonsterSay("Now you not catch us with back turned! Now we hurt you bad undead. BAD!", LANG_UNIVERSAL, 0);
+                            minion->MonsterSay("现在你不能背着背追我们了！现在我们伤害了你这个坏家伙。糟糕！", LANG_UNIVERSAL, 0);
                             minion->RemoveAurasDueToSpell(SPELL_ARTRUIS_BINDING);
                             minion->setFaction(me->GetVictim()->getFaction());
                             minion->AddThreat(me, 100000.0f);
@@ -218,21 +218,21 @@ public:
                     if (me->GetHealthPct() <= 30)
                     {
                         me->SetControlled(true, UNIT_STATE_STUNNED);
-                        me->MonsterTextEmote("Artruis is shielded. You must choose your side quickly to break his spell.", 0, true);
+                        me->MonsterTextEmote("阿图瑞斯被屏蔽了。你必须迅速选择你的立场来打破他的魔咒。", 0, true);
                         SummonsAction(ACTION_BIND_MINIONS);
                         break;
                     }
                     events.RepeatEvent(1000);
                     break;
                 case EVENT_ARTRUIS_TALK1:
-                    me->MonsterYell("I have weathered a hundred years of war and suffering. Do you truly think it wise to pit your mortal bodies against a being that cannot die? I'd venture you have more to lose.", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我经历了一百年的战争和苦难。你真的认为把你的肉体与一个不能死的存在对立起来是明智的吗？我敢打赌你还有更多的损失。", LANG_UNIVERSAL, 0);
                     events.RescheduleEvent(EVENT_ARTRUIS_TALK2, 10000);
                     break;
                 case EVENT_ARTRUIS_TALK2:
-                    me->MonsterYell("Even shattered into countless pieces, the crystals all around weaken me... perhaps i should not have underestimated the titans so...", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("即使碎成无数的碎片，周围的水晶也削弱了我…也许我不应该低估泰坦，所以…", LANG_UNIVERSAL, 0);
                     break;
                 case EVENT_ARTRUIS_TALK3:
-                    me->MonsterYell("Arthas once mustered strength... of the very same sort... perhaps he is the path that you will follow.", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("阿尔萨斯曾经聚集力量…完全一样的…也许他就是你要走的路。", LANG_UNIVERSAL, 0);
                     break;
                 case EVENT_CAST_FROST_BOLT:
                     me->CastSpell(me->GetVictim(), SPELL_ARTRUIS_FROSTBOLT, false);
@@ -265,18 +265,18 @@ public:
 quest Still At It (12644)
 ******/
 
-#define MCM_TEXT_START "Beginning the distillation in 5 seconds."
-#define MCM_TEXT_PRESSURE "Pressure's too high! Open the pressure valve!"
-#define MCM_TEXT_HEAT "The still needs heat! Light the brazier!"
-#define MCM_TEXT_BANANA "Add bananas!"
-#define MCM_TEXT_ORANGE "Add another orange! Quickly!"
-#define MCM_TEXT_PAPAYA "Put a papaya in the still!"
-#define MCM_TEXT_CORRECT1 "Nicely handled! Stay on your toes!"
-#define MCM_TEXT_CORRECT2 "That'll do. Never know what it'll need next..."
-#define MCM_TEXT_CORRECT3 "Good job! Keep your eyes open, now."
-#define MCM_TEXT_SUCCESS1 "Well done! Be ready for anything!"
-#define MCM_TEXT_SUCCESS2 "We've done it! Come get the cask."
-#define MCM_TEXT_FAILED "You have FAILED!!!"
+#define MCM_TEXT_START "在5秒内开始蒸馏。"
+#define MCM_TEXT_PRESSURE "压力太高了！ 打开压力阀！"
+#define MCM_TEXT_HEAT "仍然需要热量！ 点燃火盆！"
+#define MCM_TEXT_BANANA "加香蕉！"
+#define MCM_TEXT_ORANGE "添加另一个橙子！ 很快！"
+#define MCM_TEXT_PAPAYA "把木瓜放进蒸馏器！"
+#define MCM_TEXT_CORRECT1 "处理得很好！ 保持警惕！"
+#define MCM_TEXT_CORRECT2 "那就行了。不知道接下来需要什么…"
+#define MCM_TEXT_CORRECT3 "干得好!现在睁大眼睛。"
+#define MCM_TEXT_SUCCESS1 "做得好！ 做好准备！"
+#define MCM_TEXT_SUCCESS2 "我们做到了！快去拿木桶。"
+#define MCM_TEXT_FAILED "你失败了！！！！"
 #define ACTION_PRESSURE 1
 #define ACTION_HEAT 2
 #define ACTION_BANANA 3
@@ -546,8 +546,8 @@ public:
 ## npc_vekjik
 ######*/
 
-#define GOSSIP_VEKJIK_ITEM1 "Shaman Vekjik, I have spoken with the big-tongues and they desire peace. I have brought this offering on their behalf."
-#define GOSSIP_VEKJIK_ITEM2 "No no... I had no intentions of betraying your people. I was only defending myself. it was all a misunderstanding."
+#define GOSSIP_VEKJIK_ITEM1 "萨满·维基克，我用大舌头说话，他们渴望和平。我代表他们带来了这个礼物。"
+#define GOSSIP_VEKJIK_ITEM2 "不不…我无意背叛你的人民。我只是在自卫。这完全是个误会。"
 
 enum Vekjik
 {
@@ -608,9 +608,9 @@ public:
 ## avatar_of_freya
 ######*/
 
-#define GOSSIP_ITEM_AOF1 "I want to stop the Scourge as much as you do. How can I help?"
-#define GOSSIP_ITEM_AOF2 "You can trust me. I am no friend of the Lich King."
-#define GOSSIP_ITEM_AOF3 "I will not fail."
+#define GOSSIP_ITEM_AOF1 "我和你一样想阻止天灾。我能帮忙吗？"
+#define GOSSIP_ITEM_AOF2 "你可以相信我。 我不是巫妖王的朋友。"
+#define GOSSIP_ITEM_AOF3 "我不会失败。"
 
 enum Freya
 {
@@ -1042,9 +1042,9 @@ public:
 ## npc_adventurous_dwarf
 ######*/
 
-#define GOSSIP_OPTION_ORANGE    "Can you spare an orange?"
-#define GOSSIP_OPTION_BANANAS   "Have a spare bunch of bananas?"
-#define GOSSIP_OPTION_PAPAYA    "I could really use a papaya."
+#define GOSSIP_OPTION_ORANGE    "你能留一个橙子吗？"
+#define GOSSIP_OPTION_BANANAS   "有备用的香蕉吗？"
+#define GOSSIP_OPTION_PAPAYA    "我真的可以用木瓜。"
 
 enum AdventurousDwarf
 {
