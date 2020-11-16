@@ -311,12 +311,12 @@ public:
 
             if (urand(0, 1))
             {
-                me->MonsterYell("Forgive me.", LANG_UNIVERSAL, 0);
+                me->MonsterYell("原谅我。", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_SLAY1);
             }
             else
             {
-                me->MonsterYell("From your death springs life anew!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("你的死亡带来新生！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_SLAY2);
             }
         }
@@ -326,7 +326,7 @@ public:
             // kaboom!
             if (damage >= me->GetHealth())
             {
-                me->MonsterYell("His hold on me dissipates. I can see clearly once more. Thank you, heroes.", LANG_UNIVERSAL, 0);
+                me->MonsterYell("他对我的影响减弱了，谢谢你们，英雄们。", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_DEATH);
 
                 damage = 0;
@@ -380,7 +380,7 @@ public:
             // Wave of three
             if (_waveNumber == 1)
             {
-                me->MonsterYell("Children, assist me!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("帮助我，孩子们！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_TRIO);
                 me->SummonCreature(NPC_ANCIENT_WATER_SPIRIT, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMap()->GetHeight(me->GetPositionX(), me->GetPositionY(), MAX_HEIGHT));
                 me->SummonCreature(NPC_STORM_LASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMap()->GetHeight(me->GetPositionX(), me->GetPositionY(), MAX_HEIGHT));
@@ -389,14 +389,14 @@ public:
             // Ancient Conservator
             else if (_waveNumber == 2)
             {
-                me->MonsterYell("Eonar, your servant requires aid!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("艾欧娜, 你的侍者需要帮助！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_CONSERVATOR);
                 me->SummonCreature(NPC_ANCIENT_CONSERVATOR, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMap()->GetHeight(me->GetPositionX(), me->GetPositionY(), MAX_HEIGHT), 0, TEMPSUMMON_CORPSE_DESPAWN);
             }
             // Detonating Lashers
             else if (_waveNumber == 3)
             {
-                me->MonsterYell("The swarm of the elements shall overtake you!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("这群元素要超过你！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_DETONATING);
                 for (uint8 i = 0; i < 10; ++i)
                     me->SummonCreature(NPC_DETONATING_LASHER, me->GetPositionX() + urand(5, 20), me->GetPositionY() + urand(5, 20), me->GetMap()->GetHeight(me->GetPositionX(), me->GetPositionY(), MAX_HEIGHT), 0, TEMPSUMMON_CORPSE_DESPAWN);
@@ -533,12 +533,12 @@ public:
 
             if (_elderGUID[0] || _elderGUID[1] || _elderGUID[2])
             {
-                me->MonsterYell("Elders, grant me your strength!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("长老们，请赐予我力量！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_ELDERS);
             }
             else
             {
-                me->MonsterYell("The Conservatory must be protected!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("温室必须得到保护！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_AGGRO);
             }
         }
@@ -794,12 +794,12 @@ public:
 
             if (urand(0, 1))
             {
-                me->MonsterYell("Fertilizer.", LANG_UNIVERSAL, 0);
+                me->MonsterYell("肥料。", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_BRIGHTLEAF_SLAY1);
             }
             else
             {
-                me->MonsterYell("Your corpse will nourish the soil!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("你的尸体会滋养土壤！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_BRIGHTLEAF_SLAY2);
             }
         }
@@ -808,7 +808,7 @@ public:
         {
             if (me->GetEntry() == killer->GetEntry())
                 return;
-            me->MonsterYell("Matron, one has fallen!", LANG_UNIVERSAL, 0);
+            me->MonsterYell("夫人，有一个坠落了！", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(SOUND_BRIGHTLEAF_DEATH);
 
             // Lumberjacked
@@ -823,7 +823,7 @@ public:
             events.ScheduleEvent(EVENT_BRIGHTLEAF_SOLAR_FLARE, 5000);
             events.ScheduleEvent(EVENT_BRIGHTLEAF_UNSTABLE_SUN_BEAM, 8000);
 
-            me->MonsterYell("Matron, the Conservatory has been breached!", LANG_UNIVERSAL, 0);
+            me->MonsterYell("夫人，温室被破坏了！", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(SOUND_BRIGHTLEAF_AGGRO);
         }
 
@@ -915,12 +915,12 @@ public:
 
             if (urand(0, 1))
             {
-                me->MonsterYell("I return you whence you came!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("我从你那里回来了！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_IRONBRANCH_SLAY1);
             }
             else
             {
-                me->MonsterYell("BEGONE!", LANG_UNIVERSAL, 0);
+                me->MonsterYell("开始！", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_IRONBRANCH_SLAY2);
             }
         }
@@ -929,7 +929,7 @@ public:
         {
             if (me->GetEntry() == killer->GetEntry())
                 return;
-            me->MonsterYell("Freya! They come for you.", LANG_UNIVERSAL, 0);
+            me->MonsterYell("芙莱雅！他们来找你。", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(SOUND_IRONBRANCH_DEATH);
 
             // Lumberjacked
@@ -944,7 +944,7 @@ public:
             events.ScheduleEvent(EVENT_IRONBRANCH_IRON_ROOT, 15000);
             events.ScheduleEvent(EVENT_IRONBRANCH_THORN_SWARM, 3000);
 
-            me->MonsterYell("Mortals have no place here!", LANG_UNIVERSAL, 0);
+            me->MonsterYell("凡人在这里没有立足之地！", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(SOUND_IRONBRANCH_AGGRO);
         }
 
