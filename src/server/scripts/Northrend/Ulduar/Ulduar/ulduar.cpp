@@ -118,7 +118,7 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Lend us your aid, keeper. Together we shall defeat Yogg-Saron.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "给我你的帮助，看守人。我们一起打败尤格-萨隆。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -130,22 +130,22 @@ public:
         switch (creature->GetEntry())
         {
             case NPC_FREYA_GOSSIP:
-                creature->MonsterYell("Eonar, your servant calls for your blessing!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("伊纳尔，你的仆人请求你的祝福！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15535);
                 _keeper = KEEPER_FREYA;
                 break;
             case NPC_HODIR_GOSSIP:
-                creature->MonsterYell("The veil of winter will protect you, champions!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("冬天的面纱会保护你，英雄们！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15559);
                 _keeper = KEEPER_HODIR;
                 break;
             case NPC_MIMIRON_GOSSIP:
-                creature->MonsterYell("Combat matrix enhanced. Behold wonderous rapidity!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("战斗矩阵增强。看这惊人的速度！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15630);
                 _keeper = KEEPER_MIMIRON;
                 break;
             case NPC_THORIM_GOSSIP:
-                creature->MonsterYell("Golganneth, lend me your strengh! Grant my mortal allies the power of thunder!", LANG_UNIVERSAL, 0);
+                creature->MonsterYell("戈尔甘尼特，把你的力量借给我！给我的凡人盟友雷霆之力！", LANG_UNIVERSAL, 0);
                 creature->PlayDirectSound(15750);
                 _keeper = KEEPER_THORIM;
                 break;
