@@ -31,27 +31,27 @@ public:
         if (!pInstance)
             return true;
 
-        AddGossipItemFor(player, 0, "Teleport to the Expedition Base Camp.", GOSSIP_SENDER_MAIN, BASE_CAMP);
+        AddGossipItemFor(player, 0, "传送到登陆营地。", GOSSIP_SENDER_MAIN, BASE_CAMP);
         if (pInstance->GetData(TYPE_LEVIATHAN) >= DONE) // count special
         {
-            AddGossipItemFor(player, 0, "Teleport to the Formation Grounds.", GOSSIP_SENDER_MAIN, GROUNDS);
+            AddGossipItemFor(player, 0, "传送到登陆营地。", GOSSIP_SENDER_MAIN, GROUNDS);
             if (pInstance->GetData(TYPE_LEVIATHAN) == DONE)
             {
-                AddGossipItemFor(player, 0, "Teleport to the Colossal Forge.", GOSSIP_SENDER_MAIN, FORGE);
+                AddGossipItemFor(player, 0, "传送到大熔炉。", GOSSIP_SENDER_MAIN, FORGE);
                 if (pInstance->GetData(TYPE_XT002) == DONE)
                 {
-                    AddGossipItemFor(player, 0, "Teleport to the Scrapyard.", GOSSIP_SENDER_MAIN, SCRAPYARD);
-                    AddGossipItemFor(player, 0, "Teleport to the Antechamber of Ulduar.", GOSSIP_SENDER_MAIN, ANTECHAMBER);
+                    AddGossipItemFor(player, 0, "传送到垃圾场。", GOSSIP_SENDER_MAIN, SCRAPYARD);
+                    AddGossipItemFor(player, 0, "传送到奥杜尔的前厅。", GOSSIP_SENDER_MAIN, ANTECHAMBER);
                     if (pInstance->GetData(TYPE_KOLOGARN) == DONE)
                     {
-                        AddGossipItemFor(player, 0, "Teleport to the Shattered Walkway.", GOSSIP_SENDER_MAIN, WALKWAY);
+                        AddGossipItemFor(player, 0, "传送到破碎走廊。", GOSSIP_SENDER_MAIN, WALKWAY);
                         if (pInstance->GetData(TYPE_AURIAYA) == DONE)
                         {
-                            AddGossipItemFor(player, 0, "Teleport to the Conservatory of Life.", GOSSIP_SENDER_MAIN, CONSERVATORY);
+                            AddGossipItemFor(player, 0, "传送到生命学院。", GOSSIP_SENDER_MAIN, CONSERVATORY);
                             if (pInstance->GetData(DATA_CALL_TRAM))
-                                AddGossipItemFor(player, 0, "Teleport to the Spark of Imagination.", GOSSIP_SENDER_MAIN, SPARK);
+                                AddGossipItemFor(player, 0, "传送到思象火花。", GOSSIP_SENDER_MAIN, SPARK);
                             if (pInstance->GetData(TYPE_VEZAX) == DONE)
-                                AddGossipItemFor(player, 0, "Teleport to the Prison of Yogg-Saron.", GOSSIP_SENDER_MAIN, MADNESS);
+                                AddGossipItemFor(player, 0, "传送到尤格-萨隆监狱", GOSSIP_SENDER_MAIN, MADNESS);
                         }
                     }
                 }
