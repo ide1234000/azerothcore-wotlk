@@ -192,7 +192,7 @@ public:
             RescheduleEvents(); // Other events are scheduled here
 
             me->setActive(true);
-            me->MonsterYell("New toys? For me? I promise I won't break them this time!", LANG_UNIVERSAL, 0);
+            me->MonsterYell("新玩具？给我的？我保证这次不会弄坏它们！", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(XT_SOUND_AGGRO);
 
             if (m_pInstance)
@@ -214,12 +214,12 @@ public:
             {
                 if (urand(0, 1))
                 {
-                    me->MonsterYell("I... I think I broke it.", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我... 我想我把它弄坏了。", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(XT_SOUND_SLAY1);
                 }
                 else
                 {
-                    me->MonsterYell("I guess it doesn't bend that way.", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我想它不会弯曲的。", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(XT_SOUND_SLAY2);
                 }
             }
@@ -227,7 +227,7 @@ public:
 
         void JustDied(Unit* /*victim*/)
         {
-            me->MonsterYell("You are bad... Toys... Very... Baaaaad!", LANG_UNIVERSAL, 0);
+            me->MonsterYell("你是个非常...非常...坏的坏...玩具", LANG_UNIVERSAL, 0);
             me->PlayDirectSound(XT_SOUND_DEATH);
 
             if (m_pInstance)
@@ -268,7 +268,7 @@ public:
 
                 me->CastSpell(me, SPELL_HEARTBREAK, true);
 
-                me->MonsterTextEmote("XT-002 Deconstructor's heart is severed from his body.", 0, true);
+                me->MonsterTextEmote("XT-002 拆解者的心脏和它脱离了。", 0, true);
                 events.ScheduleEvent(EVENT_REMOVE_EMOTE, 4000);
                 return;
             }
@@ -318,7 +318,7 @@ public:
                         me->SetControlled(true, UNIT_STATE_STUNNED);
                         me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_SUBMERGED); // submerge with animation
 
-                        me->MonsterYell("So tired. I will rest for just a moment!", LANG_UNIVERSAL, 0);
+                        me->MonsterYell("太累了。我要休息一会儿！", LANG_UNIVERSAL, 0);
                         me->PlayDirectSound(XT_SOUND_HEART_OPEN);
 
                         events.CancelEventGroup(1);
@@ -344,21 +344,21 @@ public:
                     events.ScheduleEvent(EVENT_GRAVITY_BOMB, 10000, 1);
                     break;
                 case EVENT_TYMPANIC_TANTARUM:
-                    me->MonsterTextEmote("XT-002 Deconstructor begins to cause the earth to quake.", 0, true);
-                    me->MonsterYell("NO! NO! NO! NO! NO!", LANG_UNIVERSAL, 0);
+                    me->MonsterTextEmote("XT-002 拆解者开始制造地震", 0, true);
+                    me->MonsterYell("不！不！不！不！不！", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(XT_SOUND_TANTARUM);
                     me->CastSpell(me, SPELL_TYMPANIC_TANTARUM, true);
                     events.RepeatEvent(60000);
                     return;
                 case EVENT_ENRAGE:
-                    me->MonsterYell("I'm tired of these toys. I don't want to play anymore!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我和这群玩具玩累了!我再也不想和它们玩了", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(XT_SOUND_ENRAGE);
                     me->CastSpell(me, SPELL_XT002_ENRAGE, true);
                     break;
 
                 // Animation events
                 case EVENT_START_SECOND_PHASE:
-                    me->MonsterTextEmote("XT-002 Deconstructor's heart is exposed and leaking energy.", 0, true);
+                    me->MonsterTextEmote("XT-002 拆解者的心脏暴露了在外面并且正在泄漏能量", 0, true);
                     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
                     if (Unit* heart = me->GetVehicleKit() ? me->GetVehicleKit()->GetPassenger(HEART_VEHICLE_SEAT) : nullptr)
                         heart->GetAI()->DoAction(ACTION_AWAKEN_HEART);
@@ -372,7 +372,7 @@ public:
                         return;
                     }
 
-                    me->MonsterYell("I'm ready to play!", LANG_UNIVERSAL, 0);
+                    me->MonsterYell("我准备好玩一玩了！", LANG_UNIVERSAL, 0);
                     me->PlayDirectSound(XT_SOUND_HEART_CLOSED);
 
                     me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_STAND); // emerge
@@ -609,7 +609,7 @@ public:
                     }
 
                     if (!urand(0, 2))
-                        me->MonsterTextEmote("XT-002 Deconstructor consumes scrap bot to repair himself.", 0, true);
+                        me->MonsterTextEmote("XT-002拆解者消耗废旧机器人来修复自己。", 0, true);
 
                     me->DespawnOrUnsummon(1);
                 }
