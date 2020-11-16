@@ -1,633 +1,350 @@
-/*
- * Originally written by Xinef - Copyright (C) 2016+ AzerothCore <www.azerothcore.org>, released under GNU AGPL v3 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-AGPL3
+﻿/*
+ * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+ */
 
-REWRITTEN BY XINEF
-*/
+/* ScriptData
+SDName: boss_Akilzon
+SD%Complete: 75%
+SDComment: Missing timer for Call Lightning and Sound ID's
+SQLUpdate:
+#Temporary fix for Soaring Eagles
+
+EndScriptData */
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
-#include "SmartAI.h"
-#include "ScriptedGossip.h"
-
-enum AshbringerEventMisc
-{
-    AURA_OF_ASHBRINGER              =   28282,
-    NPC_SCARLET_MYRIDON             =   4295,
-    NPC_SCARLET_DEFENDER            =   4298,
-    NPC_SCARLET_CENTURION           =   4301,
-    NPC_SCARLET_SORCERER            =   4294,
-    NPC_SCARLET_WIZARD              =   4300,
-    NPC_SCARLET_ABBOT               =   4303,
-    NPC_SCARLET_MONK                =   4540,
-    NPC_SCARLET_CHAMPION            =   4302,
-    NPC_SCARLET_CHAPLAIN            =   4299,
-    NPC_FAIRBANKS                   =   4542,
-    NPC_COMMANDER_MOGRAINE          =   3976,
-    NPC_INQUISITOR_WHITEMANE        =   3977,
-    FACTION_FRIENDLY_TO_ALL         =   35,
-    DOOR_HIGH_INQUISITOR_ID         =   104600,
-};
-
-enum DataTypes
-{
-    TYPE_MOGRAINE_AND_WHITE_EVENT   =   1,
-
-    DATA_MOGRAINE                   =   2,
-    DATA_WHITEMANE                  =   3,
-    DATA_DOOR_WHITEMANE             =   4,
-
-    DATA_HORSEMAN_EVENT             =   5,
-    GAMEOBJECT_PUMPKIN_SHRINE       =   6,
-
-    DATA_VORREL                     =   7,
-    DATA_ARCANIST_DOAN              =   8
-};
-
-class instance_scarlet_monastery : public InstanceMapScript
-{
-public:
-    instance_scarlet_monastery() : InstanceMapScript("instance_scarlet_monastery", 189) { }
-
-    InstanceScript* GetInstanceScript(InstanceMap* map) const override
-    {
-        return new instance_scarlet_monastery_InstanceMapScript(map);
-    }
-
-    struct instance_scarlet_monastery_InstanceMapScript : public InstanceScript
-    {
-        instance_scarlet_monastery_InstanceMapScript(Map* map) : InstanceScript(map) {}
-
-        void OnPlayerEnter(Player* player) override
-        {
-            if (player->HasAura(AURA_OF_ASHBRINGER))
-            {
-                std::list<Creature*> ScarletList;
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_MYRIDON, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_DEFENDER, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CENTURION, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_SORCERER, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_WIZARD, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_ABBOT, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_MONK, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CHAMPION, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CHAPLAIN, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_COMMANDER_MOGRAINE, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_FAIRBANKS, 4000.0f);
-                if (!ScarletList.empty())
-                    for (std::list<Creature*>::iterator itr = ScarletList.begin(); itr != ScarletList.end(); itr++)
-                        (*itr)->setFaction(FACTION_FRIENDLY_TO_ALL);
-            }
-        }
-
-        void OnPlayerAreaUpdate(Player* player, uint32 /*oldArea*/, uint32 /*newArea*/) override
-        {
-            if (player->HasAura(AURA_OF_ASHBRINGER))
-            {
-                std::list<Creature*> ScarletList;
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_MYRIDON, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_DEFENDER, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CENTURION, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_SORCERER, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_WIZARD, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_ABBOT, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_MONK, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CHAMPION, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_SCARLET_CHAPLAIN, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_COMMANDER_MOGRAINE, 4000.0f);
-                player->GetCreatureListWithEntryInGrid(ScarletList, NPC_FAIRBANKS, 4000.0f);
-                if (!ScarletList.empty())
-                    for (std::list<Creature*>::iterator itr = ScarletList.begin(); itr != ScarletList.end(); itr++)
-                        (*itr)->setFaction(FACTION_FRIENDLY_TO_ALL);
-            }
-        }
-
-        void OnGameObjectCreate(GameObject* go) override
-        {
-            switch (go->GetEntry())
-            {
-                //case ENTRY_PUMPKIN_SHRINE: PumpkinShrineGUID = go->GetGUID(); break;
-                case DOOR_HIGH_INQUISITOR_ID:
-                    DoorHighInquisitorGUID = go->GetGUID();
-                    break;
-            }
-        }
-
-        void OnCreatureCreate(Creature* creature) override
-        {
-            switch (creature->GetEntry())
-            {
-                case NPC_COMMANDER_MOGRAINE:
-                    MograineGUID = creature->GetGUID();
-                    break;
-                case NPC_INQUISITOR_WHITEMANE:
-                    WhitemaneGUID = creature->GetGUID();
-                    break;
-            }
-        }
-
-        void SetData(uint32 type, uint32 data) override
-        {
-            switch(type)
-            {
-                case TYPE_MOGRAINE_AND_WHITE_EVENT:
-                    if (data == IN_PROGRESS)
-                    {
-                        DoUseDoorOrButton(DoorHighInquisitorGUID);
-                        encounter = IN_PROGRESS;
-                    }
-                    if (data == FAIL)
-                    {
-                        DoUseDoorOrButton(DoorHighInquisitorGUID);
-                        encounter = FAIL;
-                    }
-                    if (data == SPECIAL)
-                        encounter = SPECIAL;
-                    break;
-            }
-        }
-
-        uint64 GetData64(uint32 type) const override
-        {
-            switch (type)
-            {
-                case DATA_MOGRAINE:
-                    return MograineGUID;
-                case DATA_WHITEMANE:
-                    return WhitemaneGUID;
-                case DATA_DOOR_WHITEMANE:
-                    return DoorHighInquisitorGUID;
-            }
-            return 0;
-        }
-
-        uint32 GetData(uint32 type) const override
-        {
-            if (type == TYPE_MOGRAINE_AND_WHITE_EVENT)
-                return encounter;
-            return 0;
-        }
-    private:
-        uint64 DoorHighInquisitorGUID;
-        uint64 MograineGUID;
-        uint64 WhitemaneGUID;
-        uint32 encounter;
-    };
-};
-
-enum ScarletMonasteryTrashMisc
-{
-    SAY_WELCOME = 0,
-    AURA_ASHBRINGER = 28282,
-    //FACTION_FRIENDLY_TO_ALL = 35,
-    NPC_HIGHLORD_MOGRAINE = 16440,
-    SPELL_COSMETIC_CHAIN = 45537,
-    SPELL_COSMETIC_EXPLODE = 45935,
-    SPELL_FORGIVENESS = 28697,
-};
-
-class npc_scarlet_guard : public CreatureScript
-{
-public:
-    npc_scarlet_guard() : CreatureScript("npc_scarlet_guard") { }
-
-    struct npc_scarlet_guardAI : public SmartAI
-    {
-        npc_scarlet_guardAI(Creature* creature) : SmartAI(creature) { }
-
-        void Reset() override
-        {
-            SayAshbringer = false;
-        }
-
-        void MoveInLineOfSight(Unit* who) override
-        {
-            if (who && who->GetDistance2d(me) < 12.0f)
-            {
-                if (Player* player = who->ToPlayer())
-                {
-                    if (player->HasAura(AURA_ASHBRINGER) && !SayAshbringer)
-                    {
-                        Talk(SAY_WELCOME);
-                        me->setFaction(FACTION_FRIENDLY_TO_ALL);
-                        me->SetSheath(SHEATH_STATE_UNARMED);
-                        me->SetFacingToObject(player);
-                        me->SetStandState(UNIT_STAND_STATE_KNEEL);
-                        me->AddAura(SPELL_AURA_MOD_ROOT, me);
-                        me->CastSpell(me, SPELL_AURA_MOD_ROOT, true);
-                        SayAshbringer = true;
-                    }
-                }
-            }
-
-            SmartAI::MoveInLineOfSight(who);
-        }
-    private:
-        bool SayAshbringer = false;
-    };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_scarlet_guardAI(creature);
-    }
-};
-
-enum MograineEvents
-{
-    EVENT_SPELL_CRUSADER_STRIKE     =   1,
-    EVENT_SPELL_HAMMER_OF_JUSTICE   =   2
-};
-
-enum WhitemaneEvents
-{
-    EVENT_SPELL_HOLY_SMITE          =   1,
-    EVENT_SPELL_POWER_WORLD_SHIELD  =   2,
-    EVENT_SPELL_HEAL                =   3
-};
+#include "GridNotifiers.h"
+#include "GridNotifiersImpl.h"
+#include "Cell.h"
+#include "CellImpl.h"
+#include "zulaman.h"
+#include "Weather.h"
 
 enum Spells
 {
-    //Mograine Spells
-    SPELL_CRUSADER_STRIKE           =   14518,
-    SPELL_HAMMER_OF_JUSTICE         =   5589,
-    SPELL_LAY_ON_HANDS              =   9257,
-    SPELL_RETRIBUTION_AURA          =   8990,
-    SPELL_PERMANENT_FEIGN_DEATH     =   29266,
-
-    //Whitemanes Spells
-    SPELL_SCARLET_RESURRECTION      =   9232,
-    SPELL_DEEP_SLEEP                =   9256,
-    SPELL_DOMINATE_MIND             =   14515,
-    SPELL_HOLY_SMITE                =   9481,
-    SPELL_HEAL                      =   12039,
-    SPELL_POWER_WORD_SHIELD         =   22187
+    SPELL_STATIC_DISRUPTION     = 43622,
+    SPELL_STATIC_VISUAL         = 45265,
+    SPELL_CALL_LIGHTNING        = 43661, // Missing timer
+    SPELL_GUST_OF_WIND          = 43621,
+    SPELL_ELECTRICAL_STORM      = 43648,
+    SPELL_BERSERK               = 45078,
+    SPELL_ELECTRICAL_OVERLOAD   = 43658,
+    SPELL_EAGLE_SWOOP           = 44732,
+    SPELL_ZAP                   = 43137,
+    SPELL_SAND_STORM            = 25160
 };
 
 enum Says
 {
-    //Mograine says
-    SAY_MO_AGGRO                    =   0,
-    SAY_MO_KILL                     =   1,
-    SAY_MO_RESURRECTED              =   2,
-
-    //Whitemane says
-    SAY_WH_INTRO                    =   0,
-    SAY_WH_KILL                     =   1,
-    SAY_WH_RESURRECT                =   2,
+    SAY_AGGRO                   = 0,
+    SAY_SUMMON                  = 1,
+    SAY_INTRO                   = 2, // Not used in script
+    SAY_ENRAGE                  = 3,
+    SAY_KILL                    = 4,
+    SAY_DEATH                   = 5
 };
 
-class npc_mograine : public CreatureScript
+enum Misc
+{
+    NPC_SOARING_EAGLE           = 24858,
+    SE_LOC_X_MAX                = 400,
+    SE_LOC_X_MIN                = 335,
+    SE_LOC_Y_MAX                = 1435,
+    SE_LOC_Y_MIN                = 1370
+};
+
+enum Events
+{
+    EVENT_STATIC_DISRUPTION     = 1,
+    EVENT_GUST_OF_WIND          = 2,
+    EVENT_CALL_LIGHTNING        = 3,
+    EVENT_ELECTRICAL_STORM      = 4,
+    EVENT_RAIN                  = 5,
+    EVENT_SUMMON_EAGLES         = 6,
+    EVENT_STORM_SEQUENCE        = 7,
+    EVENT_ENRAGE                = 8
+};
+
+class boss_akilzon : public CreatureScript
 {
 public:
-    npc_mograine() : CreatureScript("npc_scarlet_commander_mograine") { }
+    boss_akilzon() : CreatureScript("boss_akilzon") { }
 
-    struct npc_mograineAI : public ScriptedAI
+    struct boss_akilzonAI : public BossAI
     {
-        npc_mograineAI(Creature* creature) : ScriptedAI(creature)
+        boss_akilzonAI(Creature* creature) : BossAI(creature, DATA_AKILZONEVENT)
         {
-            instance = creature->GetInstanceScript();
+            memset(BirdGUIDs, 0, sizeof(BirdGUIDs));
         }
 
-        uint32 AshbringerEvent(uint32 uiSteps)
+        void Reset()
         {
-            Creature* mograine = me->FindNearestCreature(NPC_HIGHLORD_MOGRAINE, 200.0f);
+            _Reset();
 
-            switch (uiSteps)
+            TargetGUID = 0;
+            CloudGUID = 0;
+            CycloneGUID = 0;
+            memset(BirdGUIDs, 0, sizeof(BirdGUIDs));
+            StormCount = 0;
+            isRaining = false;
+
+            if (instance)
+                instance->SetData(DATA_AKILZONEVENT, NOT_STARTED);
+
+            SetWeather(WEATHER_STATE_FINE, 0.0f);
+        }
+
+        void EnterCombat(Unit* /*who*/)
+        {
+            events.ScheduleEvent(EVENT_STATIC_DISRUPTION, urand(10000, 20000)); // 10 to 20 seconds (bosskillers)
+            events.ScheduleEvent(EVENT_GUST_OF_WIND, urand(20000, 30000));      // 20 to 30 seconds(bosskillers)
+            events.ScheduleEvent(EVENT_CALL_LIGHTNING, urand(10000, 20000));    // totaly random timer. can't find any info on this
+            events.ScheduleEvent(EVENT_ELECTRICAL_STORM, 60000);                // 60 seconds(bosskillers)
+            events.ScheduleEvent(EVENT_RAIN, urand(47000, 52000));
+            events.ScheduleEvent(EVENT_ENRAGE, 10 * MINUTE * IN_MILLISECONDS);  // 10 minutes till enrage(bosskillers)
+
+            Talk(SAY_AGGRO);
+            //DoZoneInCombat();
+
+            if (instance)
+                instance->SetData(DATA_AKILZONEVENT, IN_PROGRESS);
+        }
+
+        void JustDied(Unit* /*killer*/)
+        {
+            Talk(SAY_DEATH);
+            _JustDied();
+            if (instance)
+                instance->SetData(DATA_AKILZONEVENT, DONE);
+        }
+
+        void KilledUnit(Unit* who)
+        {
+            if (who->GetTypeId() == TYPEID_PLAYER)
+                Talk(SAY_KILL);
+        }
+
+        void SetWeather(uint32 weather, float grade)
+        {
+            Map* map = me->GetMap();
+            if (!map->IsDungeon())
+                return;
+
+            WorldPacket data(SMSG_WEATHER, (4 + 4 + 4));
+            data << uint32(weather) << float(grade) << uint8(0);
+
+            map->SendToPlayers(&data);
+        }
+
+        void HandleStormSequence(Unit* Cloud) // 1: begin, 2-9: tick, 10: end
+        {
+            if (StormCount < 10 && StormCount > 1)
             {
-                case 1:
-                    me->GetMotionMaster()->MovePoint(0, 1152.039795f, 1398.405518f, 32.527878f);
-                    return 2 * IN_MILLISECONDS;
-                case 2:
-                    me->SetSheath(SHEATH_STATE_UNARMED);
-                    me->SetStandState(UNIT_STAND_STATE_KNEEL);
-                    return 2 * IN_MILLISECONDS;
-                case 3:
-                    Talk(3);
-                    return 10 * IN_MILLISECONDS;
-                case 4:
-                    me->SummonCreature(NPC_HIGHLORD_MOGRAINE, 1065.130737f, 1399.350586f, 30.763723f, 6.282961f, TEMPSUMMON_TIMED_DESPAWN, 400000)->SetName("Highlord Mograine");
-                    me->FindNearestCreature(NPC_HIGHLORD_MOGRAINE, 200.0f)->setFaction(FACTION_FRIENDLY_TO_ALL);
-                    return 30 * IN_MILLISECONDS;
-                case 5:
-                    mograine->StopMovingOnCurrentPos();
-                    mograine->AI()->Talk(0);
-                    mograine->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
-                    return 4 * IN_MILLISECONDS;
-                case 6:
-                    me->SetStandState(UNIT_STAND_STATE_STAND);
-                    return 2 * IN_MILLISECONDS;
-                case 7:
-                    Talk(4);
-                    return 4 * IN_MILLISECONDS;
-                case 8:
-                    mograine->AI()->Talk(1);
-                    return 11 * IN_MILLISECONDS;
-                case 9:
-                    mograine->HandleEmoteCommand(EMOTE_ONESHOT_BATTLE_ROAR);
-                    return 4 * IN_MILLISECONDS;
-                case 10:
-                    me->SetSheath(SHEATH_STATE_UNARMED);
-                    me->SetStandState(UNIT_STAND_STATE_KNEEL);
-                    Talk(5);
-                    return 2 * IN_MILLISECONDS;
-                case 11:
-                    mograine->CastSpell(me, SPELL_FORGIVENESS, false);
-                    return 1 * IN_MILLISECONDS;
-                case 12:
-                    mograine->CastSpell(me, SPELL_COSMETIC_CHAIN, true);
-                    return 0.5 * IN_MILLISECONDS;
-                case 13:
-                    mograine->AI()->Talk(2);
-                    mograine->DespawnOrUnsummon(3 * IN_MILLISECONDS);
-                    mograine->Kill(me, me, true);
-                    return 0;
-                default:
-                    if(mograine)
-                        mograine->DespawnOrUnsummon(0);
-                    return 0;
-            }
-        }
+                // deal damage
+                int32 bp0 = 800;
+                for (uint8 i = 2; i < StormCount; ++i)
+                    bp0 *= 2;
 
-        void Reset() override
-        {
-            //Incase wipe during phase that mograine fake death
-            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-            me->RemoveAurasDueToSpell(SPELL_PERMANENT_FEIGN_DEATH);
-            SayAshbringer = false;
-            timer = 0;
-            step = 1;
-            hasDied = false;
-            heal = false;
-            fakeDeath = false;
-            events.Reset();
-        }
+                CellCoord p(acore::ComputeCellCoord(me->GetPositionX(), me->GetPositionY()));
+                Cell cell(p);
+                cell.SetNoCreate();
 
-        void MoveInLineOfSight(Unit* who) override
-        {
-            if (who && who->GetDistance2d(me) < 15.0f)
-                if (Player* player = who->ToPlayer())
-                    if (player->HasAura(AURA_ASHBRINGER) && !SayAshbringer)
+                std::list<Unit*> tempUnitMap;
+
+                {
+                    acore::AnyAoETargetUnitInObjectRangeCheck u_check(me, me, SIZE_OF_GRIDS);
+                    acore::UnitListSearcher<acore::AnyAoETargetUnitInObjectRangeCheck> searcher(me, tempUnitMap, u_check);
+
+                    TypeContainerVisitor<acore::UnitListSearcher<acore::AnyAoETargetUnitInObjectRangeCheck>, WorldTypeMapContainer > world_unit_searcher(searcher);
+                    TypeContainerVisitor<acore::UnitListSearcher<acore::AnyAoETargetUnitInObjectRangeCheck>, GridTypeMapContainer >  grid_unit_searcher(searcher);
+
+                    cell.Visit(p, world_unit_searcher, *me->GetMap(), *me, SIZE_OF_GRIDS);
+                    cell.Visit(p, grid_unit_searcher, *me->GetMap(), *me, SIZE_OF_GRIDS);
+                }
+
+                // deal damage
+                for (std::list<Unit*>::const_iterator i = tempUnitMap.begin(); i != tempUnitMap.end(); ++i)
+                {
+                    if (Unit* target = (*i))
                     {
-                        me->setFaction(FACTION_FRIENDLY_TO_ALL);
-                        me->SetSheath(SHEATH_STATE_UNARMED);
-                        me->SetStandState(UNIT_STAND_STATE_KNEEL);
-                        me->SetFacingToObject(player);
-                        me->MonsterYell(12389, LANG_UNIVERSAL, player);
-                        SayAshbringer = true;
+                        if (Cloud && !Cloud->IsWithinDist(target, 6, false))
+                            Cloud->CastCustomSpell(target, SPELL_ZAP, &bp0, nullptr, nullptr, true, 0, 0, me->GetGUID());
                     }
+                }
 
-            ScriptedAI::MoveInLineOfSight(who);
-        }
-
-        void EnterCombat(Unit* /*who*/) override
-        {
-            Talk(SAY_MO_AGGRO);
-            me->CallForHelp(150.0f);
-            me->CastSpell(me, SPELL_RETRIBUTION_AURA, true);
-            events.ScheduleEvent(EVENT_SPELL_CRUSADER_STRIKE, urand(1000, 5000));
-            events.ScheduleEvent(EVENT_SPELL_HAMMER_OF_JUSTICE, urand(6000, 11000));
-        }
-
-        void DamageTaken(Unit* /*doneBy*/, uint32& damage, DamageEffectType, SpellSchoolMask) override
-        {
-            if (damage < me->GetHealth() || hasDied || fakeDeath)
-                return;
-
-            //On first death, fake death and open door, as well as initiate whitemane if exist
-            if (Unit* Whitemane = ObjectAccessor::GetUnit(*me, instance->GetData64(DATA_WHITEMANE)))
-            {
-                instance->SetData(TYPE_MOGRAINE_AND_WHITE_EVENT, IN_PROGRESS);
-                Whitemane->GetMotionMaster()->MovePoint(1, 1163.113370f, 1398.856812f, 32.527786f);
-                me->GetMotionMaster()->MovementExpired();
-                me->GetMotionMaster()->MoveIdle();
-                me->SetHealth(0);
-                if (me->IsNonMeleeSpellCast(false))
-                    me->InterruptNonMeleeSpells(false);
-                me->ClearComboPointHolders();
-                me->RemoveAllAuras();
-                me->ClearAllReactives();
-                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-                me->CastSpell(me, SPELL_PERMANENT_FEIGN_DEATH, true);
-
-                hasDied = true;
-                fakeDeath = true;
-                damage = 0;
-                ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_WHITEMANE))->SetInCombatWithZone();
-            }
-        }
-
-        void KilledUnit(Unit* /*victim*/) override
-        {
-            Talk(SAY_MO_KILL);
-        }
-
-        void SpellHit(Unit* /*who*/, const SpellInfo* spell) override
-        {
-            //When hit with resurrection say text
-            if (spell->Id == SPELL_SCARLET_RESURRECTION)
-            {
-                Talk(SAY_MO_RESURRECTED);
-                fakeDeath = false;
-                instance->SetData(TYPE_MOGRAINE_AND_WHITE_EVENT, SPECIAL);
-            }
-        }
-
-        void UpdateAI(uint32 diff) override
-        {
-            timer = timer - diff;
-            if (SayAshbringer && step < 15)
-            {
-                if (timer <= 0)
+                // visual
+                float x, y, z;
+                z = me->GetPositionZ();
+                for (uint8 i = 0; i < 5 + rand() % 5; ++i)
                 {
-                    timer = AshbringerEvent(step);
-                    step++;
+                    x = 343.0f + rand() % 60;
+                    y = 1380.0f + rand() % 60;
+                    if (Unit* trigger = me->SummonTrigger(x, y, z, 0, 2000))
+                    {
+                        trigger->setFaction(35);
+                        trigger->SetMaxHealth(100000);
+                        trigger->SetHealth(100000);
+                        trigger->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+                        if (Cloud)
+                            Cloud->CastCustomSpell(trigger, /*43661*/SPELL_ZAP, &bp0, nullptr, nullptr, true, 0, 0, Cloud->GetGUID());
+                    }
                 }
             }
 
-            if (!UpdateVictim())
-                return;
+            ++StormCount;
 
-            if (hasDied && !heal && instance->GetData(TYPE_MOGRAINE_AND_WHITE_EVENT) == SPECIAL)
+            if (StormCount > 10)
             {
-                //On resurrection, stop fake death and heal whitemane and resume fight
-                if (Unit* Whitemane = ObjectAccessor::GetUnit(*me, instance->GetData64(DATA_WHITEMANE)))
-                {
-                    //Incase wipe during phase that mograine fake death
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-                    me->RemoveAurasDueToSpell(SPELL_PERMANENT_FEIGN_DEATH);
-                    me->CastSpell(me, SPELL_RETRIBUTION_AURA, true);
-                    me->CastSpell(Whitemane, SPELL_LAY_ON_HANDS, true);
-                    events.ScheduleEvent(EVENT_SPELL_CRUSADER_STRIKE, urand(1000, 5000));
-                    events.ScheduleEvent(EVENT_SPELL_HAMMER_OF_JUSTICE, urand(6000, 11000));
-                    if (me->GetVictim())
-                        me->GetMotionMaster()->MoveChase(me->GetVictim());
-                    heal = true;
-                }
+                StormCount = 0; // finish
+                events.ScheduleEvent(EVENT_SUMMON_EAGLES, 5000);
+                me->InterruptNonMeleeSpells(false);
+                CloudGUID = 0;
+                if (Cloud)
+                    Unit::DealDamage(Cloud, Cloud, Cloud->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
+                SetWeather(WEATHER_STATE_FINE, 0.0f);
+                isRaining = false;
             }
-
-            //This if-check to make sure mograine does not attack while fake death
-            if (fakeDeath)
-                return;
-
-            events.Update(diff);
-            if (me->HasUnitState(UNIT_STATE_CASTING))
-                return;
-
-            while (uint32 eventId = events.ExecuteEvent())
-            {
-                switch(eventId)
-                {
-                    case EVENT_SPELL_CRUSADER_STRIKE:
-                        me->CastSpell(me->GetVictim(), SPELL_CRUSADER_STRIKE, true);
-                        events.ScheduleEvent(EVENT_SPELL_CRUSADER_STRIKE, 10000);
-                        break;
-                    case EVENT_SPELL_HAMMER_OF_JUSTICE:
-                        me->CastSpell(me->GetVictim(), SPELL_HAMMER_OF_JUSTICE, true);
-                        events.ScheduleEvent(EVENT_SPELL_HAMMER_OF_JUSTICE, 60000);
-                        break;
-                }
-            }
-            DoMeleeAttackIfReady();
+            events.ScheduleEvent(EVENT_STORM_SEQUENCE, 1000);
         }
 
-    private:
-        bool SayAshbringer = false;
-        int timer = 0;
-        int step = 1;
-        bool hasDied;
-        bool heal;
-        bool fakeDeath;
-        EventMap events;
-        InstanceScript* instance;
-    };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_mograineAI(creature);
-    }
-};
-
-class boss_high_inquisitor_whitemane : public CreatureScript
-{
-public:
-    boss_high_inquisitor_whitemane() : CreatureScript("boss_high_inquisitor_whitemane") { }
-
-    struct boss_high_inquisitor_whitemaneAI : public ScriptedAI
-    {
-        boss_high_inquisitor_whitemaneAI(Creature* creature) : ScriptedAI(creature)
-        {
-            instance = creature->GetInstanceScript();
-        }
-
-        void Reset() override
-        {
-            canResurrectCheck = false;
-            canResurrect = false;
-            Wait_Timer = 7000;
-            Heal_Timer = 10000;
-        }
-
-        void JustReachedHome() override
-        {
-            instance->SetData(TYPE_MOGRAINE_AND_WHITE_EVENT, FAIL);
-        }
-
-        void EnterCombat(Unit* /*who*/) override
-        {
-            Talk(SAY_WH_INTRO);
-            events.ScheduleEvent(EVENT_SPELL_HOLY_SMITE, urand(1000, 3000));
-            events.ScheduleEvent(EVENT_SPELL_POWER_WORLD_SHIELD, 6000);
-            events.ScheduleEvent(EVENT_SPELL_HEAL, 9000);
-        }
-
-        void DamageTaken(Unit* /*doneBy*/, uint32& damage, DamageEffectType, SpellSchoolMask) override
-        {
-            if (!canResurrectCheck && damage >= me->GetHealth())
-                damage = me->GetHealth() - 1;
-        }
-
-        void KilledUnit(Unit* /*victim*/) override
-        {
-            Talk(SAY_WH_KILL);
-        }
-
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
 
-            if (canResurrect)
-            {
-                //When casting resuruction make sure to delay so on rez when reinstate battle deepsleep runs out
-                if (Wait_Timer <= diff)
-                {
-                    if (ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_MOGRAINE)))
-                    {
-                        DoCast(SPELL_SCARLET_RESURRECTION);
-                        Talk(SAY_WH_RESURRECT);
-                        canResurrect = false;
-                    }
-                }
-                else Wait_Timer -= diff;
-            }
-
-            //Cast Deep sleep when health is less than 50%
-            if (!canResurrectCheck && !HealthAbovePct(50))
-            {
-                if (me->IsNonMeleeSpellCast(false))
-                    me->InterruptNonMeleeSpells(false);
-
-                me->CastSpell(me->GetVictim(), SPELL_DEEP_SLEEP, true);
-                canResurrectCheck = true;
-                canResurrect = true;
-                return;
-            }
-
-            //while in "resurrect-mode", don't do anything
-            if (canResurrect)
-                return;
-
-            //If we are <75% hp cast healing spells at self or Mograine
-            if (Heal_Timer <= diff)
-            {
-                Creature* target = nullptr;
-
-                if (!HealthAbovePct(75))
-                    target = me;
-
-                if (Creature* mograine = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_MOGRAINE)))
-                {
-                    // checking canResurrectCheck prevents her healing Mograine while he is "faking death"
-                    if (canResurrectCheck && mograine->IsAlive() && !mograine->HealthAbovePct(75))
-                        target = mograine;
-                }
-
-                if (target)
-                    me->CastSpell(target, SPELL_HEAL, true);
-
-                Heal_Timer = 13000;
-            }
-            else Heal_Timer -= diff;
-
             events.Update(diff);
-            if (me->HasUnitState(UNIT_STATE_CASTING))
-                return;
 
             while (uint32 eventId = events.ExecuteEvent())
             {
                 switch (eventId)
                 {
-                    case EVENT_SPELL_POWER_WORLD_SHIELD:
-                        me->CastSpell(me, SPELL_POWER_WORD_SHIELD, true);
-                        events.ScheduleEvent(EVENT_SPELL_POWER_WORLD_SHIELD, 15000);
+                    case EVENT_STATIC_DISRUPTION:
+                        {
+                            Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
+                            if (!target)
+                                target = me->GetVictim();
+                            if (target)
+                            {
+                                TargetGUID = target->GetGUID();
+                                DoCast(target, SPELL_STATIC_DISRUPTION, false);
+                                me->SetInFront(me->GetVictim());
+                            }
+                            /*if (float dist = me->IsWithinDist3d(target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 5.0f) dist = 5.0f;
+                            SDisruptAOEVisual_Timer = 1000 + floor(dist / 30 * 1000.0f);*/
+                            events.ScheduleEvent(EVENT_STATIC_DISRUPTION, urand(10000, 18000));
+                            break;
+                        }
+                    case EVENT_GUST_OF_WIND:
+                        {
+                            Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
+                            if (!target)
+                                target = me->GetVictim();
+                            if (target)
+                                DoCast(target, SPELL_GUST_OF_WIND);
+                            events.ScheduleEvent(EVENT_GUST_OF_WIND, urand(20000, 30000));
+                            break;
+                        }
+                    case EVENT_CALL_LIGHTNING:
+                        DoCastVictim(SPELL_CALL_LIGHTNING);
+                        events.ScheduleEvent(EVENT_CALL_LIGHTNING, urand(12000, 17000)); // totaly random timer. can't find any info on this
                         break;
-                    case EVENT_SPELL_HOLY_SMITE:
-                        me->CastSpell(me->GetVictim(), SPELL_HOLY_SMITE, true);
-                        events.ScheduleEvent(EVENT_SPELL_HOLY_SMITE, 6000);
+                    case EVENT_ELECTRICAL_STORM:
+                        {
+                            Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 50, true);
+                            if (!target)
+                            {
+                                EnterEvadeMode();
+                                return;
+                            }
+                            target->CastSpell(target, 44007, true); // cloud visual
+                            DoCast(target, SPELL_ELECTRICAL_STORM, false); // storm cyclon + visual
+                            float x, y, z;
+                            target->GetPosition(x, y, z);
+                            /// @todo: fix it in correct way, that causes player to can fly until logout
+                            /*
+                            if (target)
+                            {
+                                target->SetDisableGravity(true);
+                                target->MonsterMoveWithSpeed(x, y, me->GetPositionZ()+15, 0);
+                            }
+                            */
+
+                            Unit* Cloud = me->SummonTrigger(x, y, me->GetPositionZ() + 16, 0, 15000);
+                            if (Cloud)
+                            {
+                                CloudGUID = Cloud->GetGUID();
+                                Cloud->SetDisableGravity(true);
+                                Cloud->StopMoving();
+                                Cloud->SetObjectScale(1.0f);
+                                Cloud->setFaction(35);
+                                Cloud->SetMaxHealth(9999999);
+                                Cloud->SetHealth(9999999);
+                                Cloud->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+                            }
+                            StormCount = 1;
+                            events.ScheduleEvent(EVENT_ELECTRICAL_STORM, 60000); // 60 seconds(bosskillers)
+                            events.ScheduleEvent(EVENT_RAIN, urand(47000, 52000));
+                            break;
+                        }
+                    case EVENT_RAIN:
+                        if (!isRaining)
+                        {
+                            SetWeather(WEATHER_STATE_HEAVY_RAIN, 0.9999f);
+                            isRaining = true;
+                        }
+                        else
+                            events.ScheduleEvent(EVENT_RAIN, 1000);
                         break;
-                    case EVENT_SPELL_HEAL:
-                        me->CastSpell(me, SPELL_HEAL, true);
+                    case EVENT_STORM_SEQUENCE:
+                        {
+                            Unit* target = ObjectAccessor::GetUnit(*me, CloudGUID);
+                            if (!target || !target->IsAlive())
+                            {
+                                EnterEvadeMode();
+                                return;
+                            }
+                            else if (Unit* Cyclone = ObjectAccessor::GetUnit(*me, CycloneGUID))
+                                Cyclone->CastSpell(target, SPELL_SAND_STORM, true); // keep casting or...
+                            HandleStormSequence(target);
+                            break;
+                        }
+                    case EVENT_SUMMON_EAGLES:
+                        Talk(SAY_SUMMON);
+
+                        float x, y, z;
+                        me->GetPosition(x, y, z);
+
+                        for (uint8 i = 0; i < 8; ++i)
+                        {
+                            Unit* bird = ObjectAccessor::GetUnit(*me, BirdGUIDs[i]);
+                            if (!bird) //they despawned on die
+                            {
+                                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                                {
+                                    x = target->GetPositionX() + irand(-10, 10);
+                                    y = target->GetPositionY() + irand(-10, 10);
+                                    z = target->GetPositionZ() + urand(16, 20);
+                                    if (z > 95)
+                                        z = 95.0f - urand(0, 5);
+                                }
+                                Creature* creature = me->SummonCreature(NPC_SOARING_EAGLE, x, y, z, 0, TEMPSUMMON_CORPSE_DESPAWN, 0);
+                                if (creature)
+                                {
+                                    creature->AddThreat(me->GetVictim(), 1.0f);
+                                    creature->AI()->AttackStart(me->GetVictim());
+                                    BirdGUIDs[i] = creature->GetGUID();
+                                }
+                            }
+                        }
+                        break;
+                    case EVENT_ENRAGE:
+                        Talk(SAY_ENRAGE);
+                        DoCast(me, SPELL_BERSERK, true);
+                        events.ScheduleEvent(EVENT_ENRAGE, 600000);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -636,166 +353,105 @@ public:
         }
 
     private:
-        InstanceScript* instance;
-        uint32 Heal_Timer;
-        uint32 Wait_Timer;
-        bool canResurrectCheck;
-        bool canResurrect;
-        EventMap events;
+        uint64 BirdGUIDs[8];
+        uint64 TargetGUID;
+        uint64 CycloneGUID;
+        uint64 CloudGUID;
+        uint8  StormCount;
+        bool   isRaining;
     };
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new boss_high_inquisitor_whitemaneAI(creature);
+        return GetInstanceAI<boss_akilzonAI>(creature);
     }
 };
 
-class npc_fairbanks : public CreatureScript
+class npc_akilzon_eagle : public CreatureScript
 {
 public:
-    npc_fairbanks() : CreatureScript("npc_fairbanks") { }
+    npc_akilzon_eagle() : CreatureScript("npc_akilzon_eagle") { }
 
-    bool OnGossipHello(Player* player, Creature* creature) override
+    struct npc_akilzon_eagleAI : public ScriptedAI
     {
-        AddGossipItemFor(player, 0, "Curse? What's going on here, Fairbanks?", GOSSIP_SENDER_MAIN, 1);
-        SendGossipMenuFor(player, 100100, creature->GetGUID());
-        return true;
-    }
+        npc_akilzon_eagleAI(Creature* creature) : ScriptedAI(creature) { }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32  /*Sender*/, uint32 uiAction) override
-    {
-        ClearGossipMenuFor(player);
+        uint32 EagleSwoop_Timer;
+        bool arrived;
+        uint64 TargetGUID;
 
-        switch (uiAction)
+        void Reset()
         {
-            case 1:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "Mograine?", GOSSIP_SENDER_MAIN, 2);
-                SendGossipMenuFor(player, 100101, creature->GetGUID());
-                return true;
-            case 2:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "What do you mean?", GOSSIP_SENDER_MAIN, 3);
-                SendGossipMenuFor(player, 100102, creature->GetGUID());
-                return true;
-            case 3:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "I still do not fully understand.", GOSSIP_SENDER_MAIN, 4);
-                SendGossipMenuFor(player, 100103, creature->GetGUID());
-                return true;
-            case 4:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "Incredible story. So how did he die?", GOSSIP_SENDER_MAIN, 5);
-                SendGossipMenuFor(player, 100104, creature->GetGUID());
-                return true;
-            case 5:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "You mean...", GOSSIP_SENDER_MAIN, 6);
-                SendGossipMenuFor(player, 100105, creature->GetGUID());
-                return true;
-            case 6:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "How do you know all of this?", GOSSIP_SENDER_MAIN, 7);
-                SendGossipMenuFor(player, 100106, creature->GetGUID());
-                return true;
-            case 7:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "A thousand? For one man?", GOSSIP_SENDER_MAIN, 8);
-                SendGossipMenuFor(player, 100107, creature->GetGUID());
-                return true;
-            case 8:
-                creature->HandleEmoteCommand(5);
-                AddGossipItemFor(player, 0, "Yet? Yet what?", GOSSIP_SENDER_MAIN, 9);
-                SendGossipMenuFor(player, 100108, creature->GetGUID());
-                return true;
-            case 9:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "And did he?", GOSSIP_SENDER_MAIN, 10);
-                SendGossipMenuFor(player, 100109, creature->GetGUID());
-                return true;
-            case 10:
-                creature->HandleEmoteCommand(274);
-                AddGossipItemFor(player, 0, "Continue please, Fairbanks.", GOSSIP_SENDER_MAIN, 11);
-                SendGossipMenuFor(player, 100110, creature->GetGUID());
-                return true;
-            case 11:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "You mean...", GOSSIP_SENDER_MAIN, 12);
-                SendGossipMenuFor(player, 100111, creature->GetGUID());
-                return true;
-            case 12:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "You were right, Fairbanks. That is tragic.", GOSSIP_SENDER_MAIN, 13);
-                SendGossipMenuFor(player, 100112, creature->GetGUID());
-                return true;
-            case 13:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "And you did...", GOSSIP_SENDER_MAIN, 14);
-                SendGossipMenuFor(player, 100113, creature->GetGUID());
-                return true;
-            case 14:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "You tell an incredible tale, Fairbanks. What of the blade? Is it beyond redemption?", GOSSIP_SENDER_MAIN, 15);
-                SendGossipMenuFor(player, 100114, creature->GetGUID());
-                return true;
-            case 15:
-                creature->HandleEmoteCommand(1);
-                AddGossipItemFor(player, 0, "But his son is dead.", GOSSIP_SENDER_MAIN, 16);
-                SendGossipMenuFor(player, 100115, creature->GetGUID());
-                return true;
-            case 16:
-                SendGossipMenuFor(player, 100116, creature->GetGUID());
-                // todo: we need to play these 3 emote in sequence, we play only the last one right now.
-                creature->HandleEmoteCommand(274);
-                creature->HandleEmoteCommand(1);
-                creature->HandleEmoteCommand(397);
-                return true;
+            EagleSwoop_Timer = urand(5000, 10000);
+            arrived = true;
+            TargetGUID = 0;
+            me->SetDisableGravity(true);
         }
 
-        return true;
-    }
-
-    struct npc_fairbanksAI : public SmartAI
-    {
-        npc_fairbanksAI(Creature* creature) : SmartAI(creature) { }
-
-        void Reset() override
+        void EnterCombat(Unit* /*who*/)
         {
-            SayAshbringer = false;
+            DoZoneInCombat();
         }
 
-        void MoveInLineOfSight(Unit* who) override
+        void MoveInLineOfSight(Unit* /*who*/) { }
+
+
+        void MovementInform(uint32, uint32)
         {
-            if (who && who->GetDistance2d(me) < 2.0f)
-                if (Player* player = who->ToPlayer())
-                    if (player->HasAura(AURA_ASHBRINGER) && !SayAshbringer)
+            arrived = true;
+            if (TargetGUID)
+            {
+                if (Unit* target = ObjectAccessor::GetUnit(*me, TargetGUID))
+                    DoCast(target, SPELL_EAGLE_SWOOP, true);
+                TargetGUID = 0;
+                me->SetSpeed(MOVE_RUN, 1.2f);
+                EagleSwoop_Timer = urand(5000, 10000);
+            }
+        }
+
+        void UpdateAI(uint32 diff)
+        {
+            if (EagleSwoop_Timer <= diff)
+                EagleSwoop_Timer = 0;
+            else
+                EagleSwoop_Timer -= diff;
+
+            if (arrived)
+            {
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                {
+                    float x, y, z;
+                    if (EagleSwoop_Timer)
                     {
-                        me->setFaction(FACTION_FRIENDLY_TO_ALL);
-                        me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
-                        me->SetSheath(SHEATH_STATE_UNARMED);
-                        me->CastSpell(me, 57767, true);
-                        me->SetDisplayId(16179);
-                        me->SetFacingToObject(player);
-                        SayAshbringer = true;
+                        x = target->GetPositionX() + irand(-10, 10);
+                        y = target->GetPositionY() + irand(-10, 10);
+                        z = target->GetPositionZ() + urand(10, 15);
+                        if (z > 95)
+                            z = 95.0f - urand(0, 5);
                     }
-
-            SmartAI::MoveInLineOfSight(who);
+                    else
+                    {
+                        target->GetContactPoint(me, x, y, z);
+                        z += 2;
+                        me->SetSpeed(MOVE_RUN, 5.0f);
+                        TargetGUID = target->GetGUID();
+                    }
+                    me->GetMotionMaster()->MovePoint(0, x, y, z);
+                    arrived = false;
+                }
+            }
         }
-    private:
-        bool SayAshbringer = false;
     };
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_fairbanksAI(creature);
+        return new npc_akilzon_eagleAI(creature);
     }
 };
 
-void AddSC_instance_scarlet_monastery()
+void AddSC_boss_akilzon()
 {
-    new instance_scarlet_monastery();
-    new npc_scarlet_guard();
-    new npc_fairbanks();
-    new npc_mograine();
-    new boss_high_inquisitor_whitemane();
+    new boss_akilzon();
+    new npc_akilzon_eagle();
 }
+
