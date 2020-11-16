@@ -49,8 +49,8 @@ INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type
 
 DELETE FROM `gossip_menu_option` WHERE `MenuID` IN (10603,10604) AND `OptionID`= 0;
 INSERT INTO `gossip_menu_option` (`MenuID`,`OptionID`,`OptionIcon`,`OptionText`,`OptionBroadcastTextID`,`OptionType`,`OptionNpcFlag`,`ActionMenuID`,`ActionPoiID`,`BoxCoded`,`BoxMoney`,`BoxText`,`BoxBroadcastTextID`,`VerifiedBuild`) VALUES 
-(10603, 0, 0, "I\d like a pair of Synthebrew Goggles.", 35220, 1, 1, 0, 0, 0, 0, "", 0, 0),
-(10604, 0, 0, "I\d like a pair of Synthebrew Goggles.", 35220, 1, 1, 0, 0, 0, 0, "", 0, 0);
+(10603, 0, 0, "我想要一副护目镜。", 35220, 1, 1, 0, 0, 0, 0, "", 0, 0),
+(10604, 0, 0, "我想要一副护目镜。", 35220, 1, 1, 0, 0, 0, 0, "", 0, 0);
 
 --
 -- END UPDATING QUERIES
