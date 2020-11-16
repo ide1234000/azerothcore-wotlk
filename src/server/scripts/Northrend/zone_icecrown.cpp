@@ -185,22 +185,22 @@ public:
                     switch (quest)
                     {
                         case QUEST_BFV_FALLEN_HEROES:
-                            me->MonsterYell("$N has defeated the fallen heroes of Valhalas battles past. This is only a beginning, but it will suffice.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("$N 已经击败了过去的瓦哈拉战役的堕落英雄。这只是一个开始，但已经足够了。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                         case QUEST_BFV_DARK_MASTER:
-                            me->MonsterYell("Khit'rix the Dark Master has been defeated by $N and his band of companions. Let the next challenge be issued!", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("黑暗大师希特里克斯已经被 $N 和他的同伴们打败了。开始下一个挑战吧！", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                         case QUEST_BFV_SIGRID:
-                            me->MonsterYell("$N has defeated Sigrid Iceborn for a second time. Well, this time he did it with the help of his friends, but a win is a win!", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("$N 第二次打败了西格丽德冰山。好吧，这次他是在朋友的帮助下完成的，但胜利就是胜利！", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                         case QUEST_BFV_CARNAGE:
-                            me->MonsterYell("The horror known as Carnage is no more. Could it be that $N is truly worthy of battle in Valhalas? We shall see.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("被称为大屠杀的恐怖已经不复存在了。难道 $N 真的值得在瓦哈拉战斗吗？我们将拭目以待。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                         case QUEST_BFV_THANE:
-                            me->MonsterYell("Thane Banahogg the Deathblow has fallen to $N and his fighting companions. He has but one challenge ahead of him. Who will it be?", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("死亡之锤巴纳霍格领主已经来到了 $N 和他的伙伴们面前。他面前只有一个挑战。他会是谁？", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                         case QUEST_BFV_FINAL:
-                            me->MonsterYell("The unthinkable has happened... $N has slain Prince Sandoval!", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                            me->MonsterYell("不可思议的事情发生了… $N 杀死了桑多瓦尔王子！", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                             break;
                     }
 
@@ -224,27 +224,27 @@ public:
                         {
                             case QUEST_BFV_FALLEN_HEROES:
                                 events.ScheduleEvent(EVENT_VALHALAS_SECOND, 8000);
-                                me->MonsterYell("$N and comrades in arms have chosen to accept honorable combat within the sacred confines of Valhalas.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterYell("$N 和战友们选择接受神圣的瓦尔哈拉范围内的光荣战斗。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                                 break;
                             case QUEST_BFV_DARK_MASTER:
                                 events.ScheduleEvent(EVENT_VALHALAS_SECOND, 8000);
-                                me->MonsterYell("$N has accepted the challenge of Khit'rix the Dark Master. May the gods show mercy upon him for Khit'rix surely will not.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterYell("$N 接受了黑暗大师赫伊特·里克斯的挑战。愿上帝怜悯他，因为希特瑞克斯肯定不会。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                                 break;
                             case QUEST_BFV_SIGRID:
                                 PrepareSummons();
-                                me->MonsterTextEmote("Circling Valhalas, Sigrid Iceborn approaches to seek her revenge!", NULL, true);
+                                me->MonsterTextEmote("围绕着瓦哈拉斯，西格丽德·科波恩走近寻找她的复仇！", NULL, true);
                                 break;
                             case QUEST_BFV_CARNAGE:
                                 events.ScheduleEvent(EVENT_VALHALAS_SECOND, 8000);
-                                me->MonsterYell("From the bowels of the Underhalls comes Carnage. Brave and foolish $N has accepted the challenge. $N and his group stand ready to face the monstrosity.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterYell("从地下室的深处传来了大屠杀。勇敢和愚蠢的 $N 接受了挑战。 $N 和他的队伍准备好面对这个怪物。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                                 break;
                             case QUEST_BFV_THANE:
                                 events.ScheduleEvent(EVENT_VALHALAS_SECOND, 8000);
-                                me->MonsterYell("Thane Banahogg returns to Valhalas for the first time in ages to prove that the vrykul are the only beings worthy to fight within its sacred ring. Will $N prove him wrong?", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterYell("死亡之锤巴纳霍格领主回到了瓦哈拉，以证明弗里库是唯一值得在其神圣之环内战斗的生物。能证明他是错的吗？", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                                 break;
                             case QUEST_BFV_FINAL:
                                 events.ScheduleEvent(EVENT_VALHALAS_SECOND, 8000);
-                                me->MonsterYell("From the depths of Icecrown Citadel, one of the Lich King's chosen comes to put an end to the existence of $N and his friends.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterYell("从冰冠城堡的深处，巫妖王的一个选择结束了 $N 和他的朋友们的存在。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                                 break;
                         }
 
@@ -257,21 +257,21 @@ public:
                         switch (currentQuest)
                         {
                             case QUEST_BFV_FALLEN_HEROES:
-                                me->MonsterYell("There can only be one outcome to such a battle: death for one side or the other. Let $n prove himself upon the bones of these outsiders who have fallen before!", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
-                                me->MonsterTextEmote("The fallen heroes of Valhalas emerge from the ground to do battle once more!", NULL, true);
+                                me->MonsterYell("这样的战斗只能有一个结果：一方或另一方的死亡。 让 $n 证明自己是这些曾经堕落过的局外人的骨头！", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                                me->MonsterTextEmote("瓦哈拉倒下的英雄们又一次从地上冒出来战斗了！", NULL, true);
                                 break;
                             case QUEST_BFV_DARK_MASTER:
-                                me->MonsterTextEmote("Khit'rix the Dark Master skitters into Valhalas from the southeast!", NULL, true);
+                                me->MonsterTextEmote("黑魔王希特里克斯从东南部飞入瓦哈拉！", NULL, true);
                                 break;
                             case QUEST_BFV_CARNAGE:
-                                me->MonsterTextEmote("Lumbering in from the south, the smell of Carnage precedes him!", NULL, true);
+                                me->MonsterTextEmote("他从南方笨拙地走进来，身上有一股大屠杀的味道！", NULL, true);
                                 break;
                             case QUEST_BFV_THANE:
-                                me->MonsterTextEmote("Thane Banahogg appears upon the overlook to the southeast!", NULL, true);
+                                me->MonsterTextEmote("塔纳巴纳霍格出现在东南方的俯视图上！", NULL, true);
                                 break;
                             case QUEST_BFV_FINAL:
-                                me->MonsterYell("Warriors of Jotunheim, I present to you, Blood Prince Sandoval!", LANG_UNIVERSAL, nullptr);
-                                me->MonsterTextEmote("Without warning, Prince Sandoval magically appears within Valhalas!", NULL, true);
+                                me->MonsterYell("约敦海姆的战士们，我向你们呈现，血王子桑多瓦尔！", LANG_UNIVERSAL, nullptr);
+                                me->MonsterTextEmote("没有警告，桑多瓦尔王子神奇地出现在瓦哈拉斯！", NULL, true);
                                 break;
                         }
 
@@ -280,13 +280,13 @@ public:
                     }
                 case EVENT_VALHALAS_THIRD:
                     {
-                        me->MonsterYell("In defeating him, he and his fighting companions have proven themselves worthy of battle in this most sacred place of vrykul honor.", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
+                        me->MonsterYell("在打败他时，他和他的战友们证明了他们在这个最神圣的威克荣誉之地值得战斗。", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID));
                         events.ScheduleEvent(EVENT_VALHALAS_THIRD + 2, 7000);
                         break;
                     }
                 case EVENT_VALHALAS_THIRD+2:
                     {
-                        me->MonsterYell("ALL HAIL $N, CHAMPION OF VALHALAS! ", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID2));
+                        me->MonsterYell("$N 万岁，瓦哈拉的冠军！", LANG_UNIVERSAL, ObjectAccessor::GetPlayer(*me, playerGUID2));
                         break;
                     }
                 case EVENT_VALHALAS_CHECK_PLAYER:
@@ -318,22 +318,22 @@ public:
         switch (quest->GetQuestId())
         {
             case QUEST_BFV_FALLEN_HEROES:
-                creature->MonsterSay("Valhalas is yours to win or die in, $N. But whatever you do, stay within the bounds of the arena. To flee is to lose and be dishonored.", LANG_UNIVERSAL, player);
+                creature->MonsterSay("瓦哈拉斯是你的赢家或死在 $N 。但无论你做什么，保持在竞技场的边界内。逃避就是失去和被羞辱。", LANG_UNIVERSAL, player);
                 break;
             case QUEST_BFV_DARK_MASTER:
-                creature->MonsterSay("Prepare yourself. Khit'rix will be entering Valhalas from the southeast. Remember, do not leave the ring or you will lose the battle.", LANG_UNIVERSAL, player);
+                creature->MonsterSay("做好准备。希特里克斯将从东南方进入瓦哈拉斯。记住，不要离开戒指，否则你将失去战斗力。", LANG_UNIVERSAL, player);
                 break;
             case QUEST_BFV_SIGRID:
-                creature->MonsterYell("Sigrid Iceborn has returned to the heights of Jotunheim to prove herself against $N. When last they met, $N bester her in personal combat. Let us see the outcome of this match.", LANG_UNIVERSAL, player);
+                creature->MonsterYell("希格丽德·科波恩已经回到佐敦海姆的高地，以证明自己与N美元的对抗。当他们最后一次见面时，$N美元在个人战斗中比她强。让我们看看这场比赛的结果。", LANG_UNIVERSAL, player);
                 break;
             case QUEST_BFV_CARNAGE:
-                creature->MonsterSay("Carnage is coming! Remember, no matter what you do, do NOT leave the battle ring or I will disqualify you and your group.", LANG_UNIVERSAL, 0);
+                creature->MonsterSay("大屠杀来了！ 请记住，无论你做什么，都不要离开战斗戒指，否则我将取消你和你的团队的资格。", LANG_UNIVERSAL, 0);
                 break;
             case QUEST_BFV_THANE:
-                creature->MonsterSay("Look to the southeast and you will see the thane upon the platform near Gjonner the Merciless when he shows himself. Let him come down. Stay within the ring of Valhalas.", LANG_UNIVERSAL, 0);
+                creature->MonsterSay("往东南看，你会看到在吉琼纳附近的平台上的塔恩，当他出现的时候，他是个残忍的人。让他下来。呆在瓦尔哈拉斯之环内。", LANG_UNIVERSAL, 0);
                 break;
             case QUEST_BFV_FINAL:
-                creature->MonsterSay("It's too late to run now. Do not leave the ring. Die bravely, $N!", LANG_UNIVERSAL, 0);
+                creature->MonsterSay("现在跑太晚了。不要离开戒指。勇敢地死去，$N！", LANG_UNIVERSAL, 0);
                 break;
         }
 
