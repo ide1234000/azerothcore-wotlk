@@ -22,7 +22,7 @@ public:
     bool OnGossipHello(Player* player, Creature* creature) override
     {
         if (IsEventActive(HALLOWEEN_EVENTID) && !player->HasAura(SPELL_TRICKED_OR_TREATED))
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Trick or Treat!", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + HALLOWEEN_EVENTID);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "不给糖果就捣蛋！", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + HALLOWEEN_EVENTID);
 
         if (creature->IsQuestGiver())
             player->PrepareQuestMenu(creature->GetGUID());
@@ -31,7 +31,7 @@ public:
             AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_TEXT_BROWSE_GOODS, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_TRADE);
 
         if (creature->IsInnkeeper())
-            AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Make this inn my home.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INN);
+            AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "把这个旅店设为我的家。", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INN);
 
         player->TalkedToCreature(creature->GetEntry(), creature->GetGUID());
         SendGossipMenuFor(player, player->GetGossipTextId(creature), creature->GetGUID());
