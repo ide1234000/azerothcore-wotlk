@@ -32,7 +32,7 @@ namespace
     {
         for (auto const& [scriptID, script] : ScriptRegistry<T>::ScriptPointerList)
         {
-            delete script;
+            std::unique_ptr<T> scriptPtr(script);  // Wrap the original pointer as a smart pointer
         }
 
         ScriptRegistry<T>::ScriptPointerList.clear();
