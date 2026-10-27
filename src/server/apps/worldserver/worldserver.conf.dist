@@ -676,6 +676,7 @@ ChatLog.Enable = 0
 
 Appender.Console=1,4,0,"1 9 3 6 5 8"
 Appender.Server=2,5,0,Server.log,w
+Appender.Playerbots=2,5,0,Playerbots.log,w
 # Appender.GM=2,5,15,gm_%s.log
 Appender.Errors=2,2,0,Errors.log,w
 # Appender.DB=3,5,0
@@ -709,6 +710,7 @@ Logger.sql=4,Console Server
 Logger.time.update=4,Console Server
 Logger.module=4,Console Server
 Logger.spells.scripts=2,Console Errors
+Logger.playerbots=5,Console Playerbots
 # Logger.achievement=4,Console Server
 # Logger.addon=4,Console Server
 # Logger.auctionHouse=4,Console Server
@@ -3464,9 +3466,9 @@ LFG.MailItemOnFullInventory = 0
 #                     LFG_OPTION_ENABLE_DUNGEON_FINDER  = 1, Enable the dungeon finder browser
 #                     LFG_OPTION_ENABLE_RAID_BROWSER    = 2, Enable the raid browser
 #                     LFG_OPTION_ENABLE_SEASONAL_BOSSES = 4, Enable seasonal bosses
-#        Default:     5
+#        Default:     7
 
-DungeonFinder.OptionsMask = 5
+DungeonFinder.OptionsMask = 7
 
 #
 #    LFG.Location.All
